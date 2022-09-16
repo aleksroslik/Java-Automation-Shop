@@ -16,6 +16,9 @@ public class User {
         this.birthday = builder.birthday;
     }
 
+    public User() {
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -86,6 +89,10 @@ public class User {
         public Builder birthday (final String birthday) {
             this.birthday = birthday;
             return this;
+        }
+
+        public User build() {
+            return new User(this);
         }
     }
 }
