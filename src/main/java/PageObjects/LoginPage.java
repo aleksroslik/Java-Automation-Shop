@@ -11,13 +11,13 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(css = "emailBtn") // do sprawdzenia lokator
+    @FindBy(name = "email")
     WebElement email;
 
-    @FindBy(css = "passBtn") // do sprawdzenia lokator
+    @FindBy(name = "password")
     WebElement pass;
 
-    @FindBy(css = "loginBtn")
+    @FindBy(id = "submit-login")
     WebElement loginBtn;
 
     public void loginUser(String email, String pass) {

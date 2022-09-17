@@ -4,6 +4,7 @@ import DataSourceConfig.AppProperties;
 import DataSourceConfig.DriverFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,10 @@ public class BaseTest {
     @BeforeAll
     static void setDriver() {
         appProperties = AppProperties.getInstance();
+    }
+
+    @BeforeEach
+    public void setUp() {
         driverFactory = new DriverFactory();
         driver = driverFactory.getDriver();
         logger.info(">>>>> Driver started successfully <<<<<");
@@ -27,6 +32,6 @@ public class BaseTest {
     @AfterEach
     public void close() {
         driver.quit();
-        logger.debug(">>>>> Driver closed <<<<<");
+        logger.info(">>>>> Driver closed <<<<<");
     }
 }

@@ -20,4 +20,8 @@ public class ProductGridPage extends BasePage {
         WebElement randomProduct = getRandomElement(productMiniatures);
         click(randomProduct);
     }
+
+    public String getRandomProductName() {
+        return getRandomElement(productMiniatures).getText();
+    }
 }
