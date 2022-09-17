@@ -10,9 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.CompletableFuture;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -41,7 +39,7 @@ public class SearchTest extends BaseTest {
         String actualProductName = searchResultsPage.getProductName();
         logger.info("Actual product name: " + actualProductName);
         assertThat(actualProductName).isEqualTo(expectedProductName);
-        logger.info(">>>> End of Random Product Search >>>>>");
+        logger.info(">>>> End of Random Product Search test >>>>>");
     }
 
     @Test
@@ -58,5 +56,6 @@ public class SearchTest extends BaseTest {
             assertThat(textValue).contains(searchItem.toUpperCase(Locale.ROOT));
             logger.info("Search result value " + textValue);
         }
+        logger.info(">>>> End of Dropdown Search test >>>>>");
     }
 }
