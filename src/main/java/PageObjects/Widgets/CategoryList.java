@@ -3,8 +3,12 @@ package PageObjects.Widgets;
 import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Coordinates;
+import org.openqa.selenium.interactions.Locatable;
+import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.support.FindBy;
 
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class CategoryList extends BasePage {
@@ -16,8 +20,8 @@ public class CategoryList extends BasePage {
     @FindBy(css = "a[data-depth='0']")
     private List<WebElement> topCategoryItems;
 
-    @FindBy(css = "a.dropdown-submenu")
-    private List<WebElement> subCategoryMenuItems; // to jest ok ma 4 elementy
+    @FindBy(css = "a[data-depth='1']")
+    private List<WebElement> subCategoryMenuItems;
 
     public List<WebElement> getSubCategoryMenuItems() {
         return subCategoryMenuItems;
@@ -59,7 +63,11 @@ public class CategoryList extends BasePage {
         click(element);
     }
 
-    public void moveToCategoryWomen() {
-        actions.moveToElement(women);
+    public void moveToCategoryClothes() {
+        actions.moveToElement(clothes).perform();
+    }
+
+    public void moveToCategoryAccessories() {
+        actions.moveToElement(accessories).perform();
     }
 }

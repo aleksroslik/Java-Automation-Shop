@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CategoriesTest extends BaseTest {
@@ -37,8 +39,8 @@ public class CategoriesTest extends BaseTest {
         logger.info(">>>> Start test Top Categories Check >>>>>");
         categoryList.waitToBeVisible(categoryList.getTopMenu());
         for(int i=0; i<categoryList.getTopCategoryItems().size(); i++) {
-            verifyTopCategoryNameWithCategoryPageTitle(i);
-            confirmFilterIsDisplayed();
+            verifyCategoryNameWithCategoryPageTitle(categoryList.getTopCategoryItems(), i);
+            confirmFilterIsDisplayed(filter.getFilterPanel());
             confirmNumberOfItemsFoundWithSearchResults();
         }
         logger.info(">>>> End test Top Categories Check >>>>>");
@@ -47,15 +49,20 @@ public class CategoriesTest extends BaseTest {
     @Test
     @DisplayName("Sub categories test")
     public void subCategoryIteration() {
-        logger.info(">>>> Start test Top Categories Check >>>>>");
+        logger.info(">>>> Start test Sub Categories Check >>>>>");
         categoryList.waitToBeVisible(categoryList.getTopMenu());
-        //hover to 1 element on top list
-        //sublista powinna sie wyswietlic
-        //petla, gdzie jest sub category item i tam przetwarza sie wszystkie akcje od click po weryfikacje
+        for (int i = 0; i < categoryList.getSubCategoryMenuItems().size(); i++) {
+            categoryList.moveToCategoryClothes();
+            verifyCategoryNameWithCategoryPageTitle(categoryList.getSubCategoryMenuItems(), i);
+            confirmFilterIsDisplayed(filter.getFilterPanel());
+            confirmNumberOfItemsFoundWithSearchResults();
+            categoryList.moveToCategoryAccessories();
+        }
+        logger.info(">>>> End test Sub Categories Check >>>>>");
     }
 
-    private void verifyTopCategoryNameWithCategoryPageTitle(int i) {
-        WebElement catItem = categoryList.getTopCategoryItems().get(i);
+    private void verifyCategoryNameWithCategoryPageTitle(List<WebElement> element, int i) {
+        WebElement catItem = element.get(i);
         String categoryName = catItem.getText();
         logger.info("Menu item title " + categoryName);
         categoryList.clickOnCategory(catItem);
@@ -64,9 +71,9 @@ public class CategoriesTest extends BaseTest {
         assertThat(categoryName).isEqualTo(catTitle);
     }
 
-    private void confirmFilterIsDisplayed() {
-        boolean filterIsDisplayed = filter.getFilterPanel().isDisplayed();
-        assertThat(filterIsDisplayed).isTrue();
+    private void confirmFilterIsDisplayed(WebElement element) {
+        boolean elementIsDisplayed = element.isDisplayed();
+        assertThat(elementIsDisplayed).isTrue();
     }
 
     public void confirmNumberOfItemsFoundWithSearchResults() {
