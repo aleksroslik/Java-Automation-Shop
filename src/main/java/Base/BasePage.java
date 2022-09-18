@@ -35,7 +35,6 @@ public class BasePage {
 
     public void sendKeysWithClear(WebElement element, String text) {
         element.clear();
-
         if(element.getText().length() !=0) {
             element.sendKeys(Keys.ALT + "a" + Keys.DELETE);
         }
@@ -58,5 +57,9 @@ public class BasePage {
 
     public void waitToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    public void moveToElement(WebElement element) {
+        actions.moveToElement(element).perform();
     }
 }

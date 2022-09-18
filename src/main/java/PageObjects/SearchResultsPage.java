@@ -15,10 +15,10 @@ public class SearchResultsPage extends BasePage {
     private WebElement productName;
 
     @FindBy(className = "col-md-4")
-    private WebElement listOfFoundItems;
+    private WebElement foundItemsBottomLabel;
 
     @FindBy(className = "total-products")
-    private WebElement totalProducts;
+    private WebElement foundItemsTopLabel;
 
     public String getProductName() {
         return productName.getText();

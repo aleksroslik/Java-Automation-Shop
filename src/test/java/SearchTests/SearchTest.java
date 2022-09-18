@@ -2,6 +2,7 @@ package SearchTests;
 
 import Base.BaseTest;
 import PageObjects.*;
+import PageObjects.Widgets.ProductGrid;
 import PageObjects.Widgets.SearchWidget;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,8 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Locale;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -20,20 +19,20 @@ public class SearchTest extends BaseTest {
 
     SearchWidget searchWidget;
     SearchResultsPage searchResultsPage;
-    ProductGridPage productGridPage;
+    ProductGrid productGrid;
 
     @BeforeEach
     public void testSetup() {
         searchWidget = new SearchWidget(driver);
         searchResultsPage = new SearchResultsPage(driver);
-        productGridPage = new ProductGridPage(driver);
+        productGrid = new ProductGrid(driver);
     }
 
     @Test
     @DisplayName("Search for random product")
     public void searchForProduct() {
         logger.info(">>>> Start test Random Product >>>>>");
-        String expectedProductName = productGridPage.getRandomProductName();
+        String expectedProductName = productGrid.getRandomProductName();
         logger.info("Expected product name: " + expectedProductName);
         searchWidget.searchWithClick(expectedProductName);
         String actualProductName = searchResultsPage.getProductName();
@@ -46,14 +45,13 @@ public class SearchTest extends BaseTest {
     @DisplayName("Search test Dropdown")
     public void searchDropdownTest() {
         logger.info(">>>> Start test Dropdown >>>>>");
-        String searchItem = "hummingbird";
+        String searchItem = "HUMMINGBIRD";
         searchWidget.searchWithoutClick(searchItem);
         searchWidget.waitToBeVisible(searchWidget.getSearchResultDropDownList());
-        String textValue;
         for(int i=0; i<searchWidget.getSearchResultDropDownItem().size(); i++) {
             WebElement myElement = searchWidget.getSearchResultDropDownItem().get(i);
-            textValue = myElement.getText();
-            assertThat(textValue).contains(searchItem.toUpperCase(Locale.ROOT));
+            String textValue = myElement.getText();
+            assertThat(textValue).contains(searchItem);
             logger.info("Search result value " + textValue);
         }
         logger.info(">>>> End of Dropdown Search test >>>>>");

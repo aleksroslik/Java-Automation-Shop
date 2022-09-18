@@ -23,7 +23,7 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName) { //sprobuj zrobic return this i wtedy fluent faker
         this.firstName = firstName;
     }
 
