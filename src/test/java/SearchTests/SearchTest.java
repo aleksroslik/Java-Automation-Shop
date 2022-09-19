@@ -2,8 +2,8 @@ package SearchTests;
 
 import Base.BaseTest;
 import PageObjects.*;
-import PageObjects.Widgets.ProductGrid;
-import PageObjects.Widgets.SearchWidget;
+import PageObjects.Components.ProductGrid;
+import PageObjects.Components.SearchWidget;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class SearchTest extends BaseTest {
 
     @Test
     @DisplayName("Search for random product")
-    public void searchForProduct() {
+    public void searchForRandomProduct() {
         logger.info(">>>> Start test Random Product >>>>>");
         String expectedProductName = productGrid.getRandomProductName();
         logger.info("Expected product name: " + expectedProductName);
@@ -43,7 +43,7 @@ public class SearchTest extends BaseTest {
 
     @Test
     @DisplayName("Search test Dropdown")
-    public void searchDropdownTest() {
+    public void searchInputDropdownTest() {
         logger.info(">>>> Start test Dropdown >>>>>");
         String searchItem = "HUMMINGBIRD";
         searchWidget.searchWithoutClick(searchItem);

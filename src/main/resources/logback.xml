@@ -16,8 +16,8 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- daily rollover -->
             <fileNamePattern>${DEV_HOME}/timeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.zip</fileNamePattern>
-            <maxHistory>3</maxHistory>
-            <totalSizeCap>30KB</totalSizeCap>
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>10KB</totalSizeCap>
         </rollingPolicy>
         <encoder>
             <pattern>%relative [%thread] %-5level %logger{35} - %msg%n</pattern>

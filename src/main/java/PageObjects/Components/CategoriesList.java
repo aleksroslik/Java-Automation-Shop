@@ -1,19 +1,15 @@
-package PageObjects.Widgets;
+package PageObjects.Components;
 
 import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Coordinates;
-import org.openqa.selenium.interactions.Locatable;
-import org.openqa.selenium.interactions.Mouse;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class CategoryList extends BasePage {
+public class CategoriesList extends BasePage {
 
-    public CategoryList(WebDriver driver) {
+    public CategoriesList(WebDriver driver) {
         super(driver);
     }
 
@@ -23,20 +19,8 @@ public class CategoryList extends BasePage {
     @FindBy(css = "a[data-depth='1']")
     private List<WebElement> subCategoryMenuItems;
 
-    public List<WebElement> getSubCategoryMenuItems() {
-        return subCategoryMenuItems;
-    }
-
-    public List<WebElement> getTopCategoryItems() {
-        return topCategoryItems;
-    }
-
     @FindBy(id = "top-menu")
     private WebElement topMenu;
-
-    public WebElement getTopMenu() {
-        return topMenu;
-    }
 
     @FindBy(id = "category-3")
     private WebElement clothes;
@@ -59,15 +43,43 @@ public class CategoryList extends BasePage {
     @FindBy(css = "li#category-8")
     private WebElement homeAccessories;
 
+    public WebElement getTopMenu() {
+        return topMenu;
+    }
+
+    public WebElement getClothes() {
+        return clothes;
+    }
+
+    public WebElement getArt() {
+        return art;
+    }
+
+    public WebElement getAccessories() {
+        return accessories;
+    }
+
+    public List<WebElement> getSubCategoryMenuItems() {
+        return subCategoryMenuItems;
+    }
+
+    public List<WebElement> getTopCategoryItems() {
+        return topCategoryItems;
+    }
+
     public void clickOnCategory(WebElement element) {
         click(element);
     }
 
-    public void moveToCategoryClothes() {
-        actions.moveToElement(clothes).perform();
+    public void clickOnArtCategory() {
+        click(art);
     }
 
-    public void moveToCategoryAccessories() {
-        actions.moveToElement(accessories).perform();
+    public void clickOnClothesCategory() {
+        click(clothes);
+    }
+
+    public void clickOnAccessoriesCategory() {
+        click(accessories);
     }
 }

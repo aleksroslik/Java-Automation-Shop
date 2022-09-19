@@ -2,9 +2,9 @@ package ProductsAndCategoriesTests;
 
 import Base.BaseTest;
 import PageObjects.CategoryDetailsPage;
-import PageObjects.Widgets.CategoryList;
-import PageObjects.Widgets.Filter;
-import PageObjects.Widgets.ProductGrid;
+import PageObjects.Components.CategoriesList;
+import PageObjects.Components.Filter;
+import PageObjects.Components.ProductGrid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,14 +20,14 @@ public class CategoriesTest extends BaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(CategoriesTest.class);
 
-    CategoryList categoryList;
+    CategoriesList categoriesList;
     CategoryDetailsPage categoryDetailsPage;
     Filter filter;
     ProductGrid productGrid;
 
     @BeforeEach
     public void testSetup() {
-        categoryList = new CategoryList(driver);
+        categoriesList = new CategoriesList(driver);
         categoryDetailsPage = new CategoryDetailsPage(driver);
         filter = new Filter(driver);
         productGrid = new ProductGrid(driver);
@@ -37,11 +37,11 @@ public class CategoriesTest extends BaseTest {
     @DisplayName("Main categories test")
     public void mainCategoryIteration() {
         logger.info(">>>> Start test Top Categories Check >>>>>");
-        categoryList.waitToBeVisible(categoryList.getTopMenu());
-        for(int i=0; i<categoryList.getTopCategoryItems().size(); i++) {
-            verifyCategoryNameWithCategoryPageTitle(categoryList.getTopCategoryItems(), i);
+        categoriesList.waitToBeVisible(categoriesList.getTopMenu());
+        for(int i = 0; i< categoriesList.getTopCategoryItems().size(); i++) {
+            verifyCategoryNameWithCategoryPageTitle(categoriesList.getTopCategoryItems(), i);
             confirmFilterIsDisplayed(filter.getFilterPanel());
-            confirmNumberOfItemsFoundWithSearchResults();
+            compareNumberOfItemsFoundWithSearchResults();
         }
         logger.info(">>>> End test Top Categories Check >>>>>");
     }
@@ -50,13 +50,13 @@ public class CategoriesTest extends BaseTest {
     @DisplayName("Sub categories test")
     public void subCategoryIteration() {
         logger.info(">>>> Start test Sub Categories Check >>>>>");
-        categoryList.waitToBeVisible(categoryList.getTopMenu());
-        for (int i = 0; i < categoryList.getSubCategoryMenuItems().size(); i++) {
-            categoryList.moveToCategoryClothes();
-            verifyCategoryNameWithCategoryPageTitle(categoryList.getSubCategoryMenuItems(), i);
+        categoriesList.waitToBeVisible(categoriesList.getTopMenu());
+        for (int i = 0; i < categoriesList.getSubCategoryMenuItems().size(); i++) {
+            categoriesList.moveToElement(categoriesList.getClothes());
+            verifyCategoryNameWithCategoryPageTitle(categoriesList.getSubCategoryMenuItems(), i);
             confirmFilterIsDisplayed(filter.getFilterPanel());
-            confirmNumberOfItemsFoundWithSearchResults();
-            categoryList.moveToCategoryAccessories();
+            compareNumberOfItemsFoundWithSearchResults();
+            categoriesList.moveToElement(categoriesList.getAccessories());
         }
         logger.info(">>>> End test Sub Categories Check >>>>>");
     }
@@ -65,7 +65,7 @@ public class CategoriesTest extends BaseTest {
         WebElement catItem = element.get(i);
         String categoryName = catItem.getText();
         logger.info("Menu item title " + categoryName);
-        categoryList.clickOnCategory(catItem);
+        categoriesList.clickOnCategory(catItem);
         String catTitle = categoryDetailsPage.getCategoryTitle();
         logger.info("Top category title " + catTitle);
         assertThat(categoryName).isEqualTo(catTitle);
@@ -76,7 +76,7 @@ public class CategoriesTest extends BaseTest {
         assertThat(elementIsDisplayed).isTrue();
     }
 
-    public void confirmNumberOfItemsFoundWithSearchResults() {
+    public void compareNumberOfItemsFoundWithSearchResults() {
         String results = String.valueOf(productGrid.productListSize());
         logger.info("List of elements displayed " + results);
         String actualResults = categoryDetailsPage.getResultsLabelText();

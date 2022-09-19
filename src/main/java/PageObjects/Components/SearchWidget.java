@@ -1,4 +1,4 @@
-package PageObjects.Widgets;
+package PageObjects.Components;
 
 import Base.BasePage;
 
