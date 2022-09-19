@@ -1,9 +1,12 @@
 package PageObjects;
 
 import Base.BasePage;
+import Models.User.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.List;
 
 public class RegistrationPage extends BasePage {
 
@@ -11,8 +14,8 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(name = "id_gender")
-    private WebElement genderBtn;
+    @FindBy(className = "radio-inline")
+    private List<WebElement> socialTitle;
 
     @FindBy(name = "firstname")
     private WebElement firstName;
@@ -41,28 +44,16 @@ public class RegistrationPage extends BasePage {
     @FindBy(name = "psgdpr")
     private WebElement checkboxAccept;
 
-    public void setGenderBtn(WebElement genderBtn) {
-        this.genderBtn = genderBtn;
+    @FindBy(css = "[data-link-action]")
+    private WebElement submitBtn;
+
+    public RegistrationPage selectRandomSocialTitle() {
+        getRandomElement(socialTitle).click();
+        return this;
     }
 
-    public void setFirstName(WebElement firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(WebElement lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setEmail(WebElement email) {
-        this.email = email;
-    }
-
-    public void setPassword(WebElement password) {
-        this.password = password;
-    }
-
-    public void setDateOfBirth(WebElement dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void submitForm() {
+        click(submitBtn);
     }
 
     public RegistrationPage acceptAgreements() {
@@ -70,6 +61,15 @@ public class RegistrationPage extends BasePage {
         checkboxNewsLetter.click();
         checkboxPrivacy.click();
         checkboxOffers.click();
+        return this;
+    }
+
+    public RegistrationPage setUserData(User user) {
+        sendKeys(firstName, user.getFirstName());
+        sendKeys(lastName, user.getLastName());
+        sendKeys(email, user.getEmail());
+        sendKeys(password, user.getPassword());
+        sendKeys(dateOfBirth, user.getBirthday());
         return this;
     }
 }

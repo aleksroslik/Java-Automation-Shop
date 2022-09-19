@@ -1,7 +1,6 @@
 package PageObjects;
 
 import Base.BasePage;
-import Models.User.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,8 +14,14 @@ public class HomePage extends BasePage {
     @FindBy(css = "[title] .hidden-sm-down")
     private WebElement login;
 
-    public HomePage goToLoginPage() {
+    @FindBy(className = "account")
+    private WebElement accountName;
+
+    public void goToLoginPage() {
         click(login);
-        return this;
+    }
+
+    public String getAccountNameText() {
+        return accountName.getText();
     }
 }

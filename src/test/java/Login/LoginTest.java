@@ -8,6 +8,8 @@ import PageObjects.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class LoginTest extends BaseTest {
 
     LoginPage loginPage;
@@ -24,6 +26,9 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginExistingUser() {
         homePage.goToLoginPage();
-        loginPage.login(user);
+        loginPage.loginUser(user);
+
+        logger.info("Account name is: " + homePage.getAccountNameText());
+        assertThat(homePage.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
     }
 }

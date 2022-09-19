@@ -5,15 +5,11 @@ import PageObjects.CategoryDetailsPage;
 import PageObjects.Components.CategoriesList;
 import PageObjects.Components.Filter;
 import PageObjects.Components.ProductGrid;
-import com.sun.jdi.DoubleValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.math.BigDecimal;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

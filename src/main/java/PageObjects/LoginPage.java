@@ -24,22 +24,11 @@ public class LoginPage extends BasePage {
     @FindBy(className = "no-account")
     WebElement registerBtn;
 
-    public void loginUser(String email, String pass) {
-        sendKeys(this.email, email);
-        sendKeys(this.pass, pass);
-        click(loginBtn);
-    }
-
-    public void openRegisterPage() {
+    public void goToRegistration() {
         click(registerBtn);
     }
 
-    public LoginPage goToRegistration() {
-        click(registerBtn);
-        return this;
-    }
-
-    public void login(User user) {
+    public void loginUser(User user) {
         sendKeys(email, user.getEmail());
         sendKeys(pass, user.getPassword());
         click(loginBtn);
