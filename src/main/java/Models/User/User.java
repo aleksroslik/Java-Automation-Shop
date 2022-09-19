@@ -8,6 +8,14 @@ public class User {
     private String password;
     private String birthday;
 
+    public User(String firstName, String lastName, String email, String password, String birthday) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthday;
+    }
+
     public User(final Builder builder) {
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
