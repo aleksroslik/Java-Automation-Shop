@@ -23,19 +23,8 @@ public class Filter extends BasePage {
     @FindBy(css = ".js-search-filters-clear-all")
     private WebElement clearBtn;
 
-    @FindBy(css = "[aria-disabled] .ui-corner-all:nth-child(3)")
+    @FindBy(xpath= "//div[contains(@class, 'ui-slider')]/a[2]")
     private WebElement sliderRight;
-
-    public WebElement getSliderRight() {
-        return sliderRight;
-    }
-
-    @FindBy(css = "[aria-disabled] .ui-corner-all:nth-child(2)")
-    WebElement dataSlider;
-
-    public WebElement getDataSlider() {
-        return dataSlider;
-    }
 
     @FindBy(css = "#slider-range_71913 a:nth-child(2)")
     private WebElement sliderLeft;
@@ -57,8 +46,8 @@ public class Filter extends BasePage {
     }
 
     public void clearFilter() throws InterruptedException {
-        Thread.sleep(500);
+        waitToBeClickable(clearBtn);
         clearBtn.click();
-        Thread.sleep(500);
+        Thread.sleep(300);
     }
 }
