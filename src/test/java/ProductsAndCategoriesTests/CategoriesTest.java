@@ -76,7 +76,7 @@ public class CategoriesTest extends BaseTest {
         assertThat(elementIsDisplayed).isTrue();
     }
 
-    public void compareNumberOfItemsFoundWithSearchResults() {
+    private void compareNumberOfItemsFoundWithSearchResults() {
         String results = String.valueOf(productGrid.productListSize());
         logger.info("List of elements displayed " + results);
         String actualResults = categoryDetailsPage.getResultsLabelText();
