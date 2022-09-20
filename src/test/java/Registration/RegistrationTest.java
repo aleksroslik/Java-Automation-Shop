@@ -42,8 +42,7 @@ public class RegistrationTest extends BaseTest {
 
         registrationPage
                 .selectRandomSocialTitle()
-                .setUserData
-                        (new User(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getBirthday()))
+                .setUserData(user)
                 .acceptAgreements()
                 .submitForm();
 

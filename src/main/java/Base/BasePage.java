@@ -27,7 +27,7 @@ public class BasePage {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         actions = new Actions(driver);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(System.getProperty("webelementTimeout"))));
     }
 
     public void click(WebElement element) {

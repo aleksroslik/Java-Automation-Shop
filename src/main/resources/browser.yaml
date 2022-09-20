@@ -5,4 +5,4 @@ browser:
   browserName: chrome
   attachscreenshot: true
   headless: true
-  webelementTimeout: 60
+  webelementTimeout: 15
