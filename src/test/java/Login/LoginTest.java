@@ -25,10 +25,12 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginExistingUser() {
+        logger.info(">>>> Start Login test >>>>>");
         homePage.goToLoginPage();
         loginPage.loginUser(user);
 
         logger.info("Account name is: " + homePage.getAccountNameText());
         assertThat(homePage.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
+        logger.info(">>>> End Login test >>>>>");
     }
 }

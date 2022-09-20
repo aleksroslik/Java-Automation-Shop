@@ -6,8 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.List;
-
 public class Filter extends BasePage {
 
     public Filter(WebDriver driver) {
@@ -17,37 +15,33 @@ public class Filter extends BasePage {
     @FindBy(id = "search_filters")
     private WebElement filterPanel;
 
-    @FindBy(className = "ps-shown-by-js")
-    private List<WebElement> checkboxList;
-
     @FindBy(css = ".js-search-filters-clear-all")
     private WebElement clearBtn;
 
     @FindBy(xpath= "//div[contains(@class, 'ui-slider')]/a[2]")
     private WebElement sliderRight;
 
-    @FindBy(css = "#slider-range_71913 a:nth-child(2)")
+    @FindBy(xpath= "//div[contains(@class, 'ui-slider')]/a[1]")
     private WebElement sliderLeft;
 
     public WebElement getFilterPanel() {
         return filterPanel;
     }
 
-    public List<WebElement> getCheckboxList() {
-        return checkboxList;
-    }
-
-    public void slideToLocationLeft(int xTimes) throws InterruptedException {
+    public void slideToLocationLeft(int xTimes) {
         for (int i=1; i<xTimes; i++) {
-            Thread.sleep(300);
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             sliderRight.sendKeys(Keys.ARROW_LEFT);
         }
-        sliderRight.sendKeys(Keys.ENTER);
     }
 
-    public void clearFilter() throws InterruptedException {
+    public void clearFilter() {
         waitToBeClickable(clearBtn);
         clearBtn.click();
-        Thread.sleep(300);
+        waitForUrlToBe("http://146.59.32.4/index.php?id_category=9&controller=category&id_lang=2");
     }
 }

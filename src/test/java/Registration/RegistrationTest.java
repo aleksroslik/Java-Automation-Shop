@@ -35,6 +35,7 @@ public class RegistrationTest extends BaseTest {
     @Test
     @DisplayName("Register new user")
     public void registerNewUser() {
+        logger.info(">>>> Start Registration test >>>>>");
         homePage.goToLoginPage();
 
         loginPage.goToRegistration();
@@ -48,5 +49,6 @@ public class RegistrationTest extends BaseTest {
 
         logger.info("Account name is: " + homePage.getAccountNameText());
         assertThat(homePage.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
+        logger.info(">>>> End Registration test >>>>>");
     }
 }

@@ -32,7 +32,7 @@ public class FiltersTest extends BaseTest {
 
     @Test
     @DisplayName("Filters test")
-    public void filtersTest() throws InterruptedException {
+    public void filtersTest() {
         logger.info(">>>> Start test Filters >>>>>");
 
         categoriesList.clickOnArtCategory();
@@ -40,16 +40,23 @@ public class FiltersTest extends BaseTest {
         logger.info("Number of products WITHOUT filter on " + numberOfProductsDisplayed);
 
         filter.slideToLocationLeft(20);
-        int numberOfProductsWithFilter = productGrid.productListSize();
-        logger.info("Number of products WITH filter on " + numberOfProductsWithFilter);
 
-        Double price = categoryDetailsPage.getProductPrice();
-        logger.info("Price " + price);
-
-        assertThat(price).isBetween(9.0, 10.0);
+        verifyPriceForEachProduct();
 
         filter.clearFilter();
+
         int numberOfProductsAfterRefresh = productGrid.productListSize();
         logger.info("Number of Products after refresh " + numberOfProductsAfterRefresh);
+        assertThat(numberOfProductsAfterRefresh).isEqualTo(numberOfProductsDisplayed);
+        logger.info(">>>> End Filters test >>>>>");
+    }
+
+    private void verifyPriceForEachProduct() {
+        for (int i = 0; i < productGrid.productListSize(); i++) {
+            productGrid.getProductMiniatures().get(i);
+            Double price = categoryDetailsPage.getProductPrice();
+            logger.info("Price " + price);
+            assertThat(price).isBetween(9.0, 10.0);
+        }
     }
 }

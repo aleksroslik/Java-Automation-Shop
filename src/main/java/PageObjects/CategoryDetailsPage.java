@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.math.BigDecimal;
-
 public class CategoryDetailsPage extends BasePage {
 
     public CategoryDetailsPage(WebDriver driver) {
@@ -31,7 +29,6 @@ public class CategoryDetailsPage extends BasePage {
     @FindBy(className = "filter-block")
     private WebElement filterPriceRange;
 
-
     public String getCategoryTitle() {
         return categoryTitle.getText();
     }
@@ -44,15 +41,9 @@ public class CategoryDetailsPage extends BasePage {
         return filterPriceRange.getText();
     }
 
-    /*public BigDecimal getProductPrice() {
-        String price = productPrice.getText();
-        String priceWithoutCurrency = price.replace("$", "");
-        return new BigDecimal(priceWithoutCurrency);
-    }*/
-
     public Double getProductPrice() {
         String price = productPrice.getText();
-        String priceWithoutCurrency = price.replace("$", "");
-        return Double.parseDouble(priceWithoutCurrency);
+        String plainPriceValue = price.replace("$", "");
+        return Double.parseDouble(plainPriceValue);
     }
 }

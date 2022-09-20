@@ -65,6 +65,14 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public void waitForElementsVisibility(List<WebElement> elements) {
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
+    }
+
+    public void waitForUrlToBe(String url) {
+        wait.until(ExpectedConditions.urlToBe(url));
+    }
+
     public void moveToElement(WebElement element) {
         actions.moveToElement(element).perform();
     }
