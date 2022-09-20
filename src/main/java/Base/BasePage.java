@@ -12,6 +12,10 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
 
@@ -75,5 +79,17 @@ public class BasePage {
 
     public void moveToElement(WebElement element) {
         actions.moveToElement(element).perform();
+    }
+
+    static ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
+
+    static public void scheduleWait(long ms){
+        try{
+            CountDownLatch l = new CountDownLatch(1);
+            ses.schedule(l::countDown, ms, TimeUnit.MILLISECONDS);
+            l.await();
+        } catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 }

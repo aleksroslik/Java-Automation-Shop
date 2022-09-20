@@ -30,11 +30,7 @@ public class Filter extends BasePage {
 
     public void slideToLocationLeft(int xTimes) {
         for (int i=1; i<xTimes; i++) {
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            scheduleWait(400);
             sliderRight.sendKeys(Keys.ARROW_LEFT);
         }
     }
