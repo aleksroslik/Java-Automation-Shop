@@ -63,14 +63,6 @@ public class CategoriesList extends BasePage {
         return accessories;
     }
 
-    public List<WebElement> getSubCategoryMenuItems() {
-        return subCategoryMenuItems;
-    }
-
-    public List<WebElement> getTopCategoryItems() {
-        return topCategoryItems;
-    }
-
     public void clickOnCategory(WebElement element) {
         click(element);
     }
@@ -85,5 +77,35 @@ public class CategoriesList extends BasePage {
 
     public void clickOnAccessoriesCategory() {
         click(accessories);
+    }
+
+    public int topCategoriesListSize() {
+        return topCategoryItems.size();
+    }
+
+    public int subCategoriesListSize() {
+        return subCategoryMenuItems.size();
+    }
+
+    public WebElement getTopCategory(int i) {
+        return topCategoryItems.get(i);
+    }
+
+    public WebElement getSubCategory(int i) {
+        return subCategoryMenuItems.get(i);
+    }
+
+    public String getTopCategoryTitle(int i) {
+        WebElement catItem = topCategoryItems.get(i);
+        String categoryName = catItem.getText();
+        logger.info("Menu item title " + categoryName);
+        return categoryName;
+    }
+
+    public String getSubCategoryTitle(int i) {
+        WebElement catItem = subCategoryMenuItems.get(i);
+        String categoryName = catItem.getText();
+        logger.info("Menu item title " + categoryName);
+        return categoryName;
     }
 }

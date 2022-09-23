@@ -8,11 +8,8 @@ import PageObjects.Components.ProductGrid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -38,9 +35,9 @@ public class CategoriesTest extends BaseTest {
     public void mainCategoryIteration() {
         logger.info(">>>> Start test Top Categories Check >>>>>");
         categoriesList.waitToBeVisible(categoriesList.getTopMenu());
-        for(int i = 0; i< categoriesList.getTopCategoryItems().size(); i++) {
-            verifyCategoryNameWithCategoryPageTitle(categoriesList.getTopCategoryItems(), i);
-            confirmFilterIsDisplayed(filter.getFilterPanel());
+        for(int i = 0; i< categoriesList.topCategoriesListSize(); i++) {
+            verifyTopCategoryNameWithCategoryPageTitle(i);
+            confirmThatFilterIsVisible();
             compareNumberOfItemsFoundWithSearchResults();
         }
         logger.info(">>>> End test Top Categories Check >>>>>");
@@ -51,29 +48,35 @@ public class CategoriesTest extends BaseTest {
     public void subCategoryIteration() {
         logger.info(">>>> Start test Sub Categories Check >>>>>");
         categoriesList.waitToBeVisible(categoriesList.getTopMenu());
-        for (int i = 0; i < categoriesList.getSubCategoryMenuItems().size(); i++) {
+        for (int i = 0; i < categoriesList.subCategoriesListSize(); i++) {
             categoriesList.moveToElement(categoriesList.getClothes());
-            verifyCategoryNameWithCategoryPageTitle(categoriesList.getSubCategoryMenuItems(), i);
-            confirmFilterIsDisplayed(filter.getFilterPanel());
+            verifySubCategoryNameWithCategoryPageTitle(i);
+            confirmThatFilterIsVisible();
             compareNumberOfItemsFoundWithSearchResults();
             categoriesList.moveToElement(categoriesList.getAccessories());
         }
         logger.info(">>>> End test Sub Categories Check >>>>>");
     }
 
-    private void verifyCategoryNameWithCategoryPageTitle(List<WebElement> element, int i) {
-        WebElement catItem = element.get(i);
-        String categoryName = catItem.getText();
-        logger.info("Menu item title " + categoryName);
-        categoriesList.clickOnCategory(catItem);
+    private void verifyTopCategoryNameWithCategoryPageTitle(int i) {
+        String categoryName = categoriesList.getTopCategoryTitle(i);
+        categoriesList.clickOnCategory(categoriesList.getTopCategory(i));
         String catTitle = categoryDetailsPage.getCategoryTitle();
         logger.info("Top category title " + catTitle);
         assertThat(categoryName).isEqualTo(catTitle);
     }
 
-    private void confirmFilterIsDisplayed(WebElement element) {
-        boolean elementIsDisplayed = element.isDisplayed();
-        assertThat(elementIsDisplayed).isTrue();
+    private void verifySubCategoryNameWithCategoryPageTitle(int i) {
+        String categoryName = categoriesList.getSubCategoryTitle(i);
+        categoriesList.clickOnCategory(categoriesList.getSubCategory(i));
+        String catTitle = categoryDetailsPage.getCategoryTitle();
+        logger.info("Top category title " + catTitle);
+        assertThat(categoryName).isEqualTo(catTitle);
+    }
+
+    public void confirmThatFilterIsVisible() {
+        boolean isFilterDisplayed = filter.confirmFilterIsDisplayed();
+        logger.info("Filter display: " + isFilterDisplayed);
     }
 
     private void compareNumberOfItemsFoundWithSearchResults() {

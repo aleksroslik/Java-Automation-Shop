@@ -32,4 +32,7 @@ public class ProductGrid extends BasePage {
     public int productListSize() {
         return productMiniatures.size();
     }
+
+    public void getMiniature(int i) {
+    }
 }

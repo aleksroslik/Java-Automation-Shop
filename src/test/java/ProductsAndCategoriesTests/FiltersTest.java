@@ -34,12 +34,12 @@ public class FiltersTest extends BaseTest {
     @DisplayName("Filters test")
     public void filtersTest() {
         logger.info(">>>> Start test Filters >>>>>");
-
         categoriesList.clickOnArtCategory();
+
         int numberOfProductsDisplayed = productGrid.productListSize();
         logger.info("Number of products WITHOUT filter on " + numberOfProductsDisplayed);
 
-        filter.slideToLocationLeft(20);
+        filter.slideToChangePriceRange();
 
         verifyPriceForEachProduct();
 
@@ -47,15 +47,16 @@ public class FiltersTest extends BaseTest {
 
         int numberOfProductsAfterRefresh = productGrid.productListSize();
         logger.info("Number of Products after refresh " + numberOfProductsAfterRefresh);
+
         assertThat(numberOfProductsAfterRefresh).isEqualTo(numberOfProductsDisplayed);
         logger.info(">>>> End Filters test >>>>>");
     }
 
     private void verifyPriceForEachProduct() {
         for (int i = 0; i < productGrid.productListSize(); i++) {
-            productGrid.getProductMiniatures().get(i);
-            Double price = categoryDetailsPage.getProductPrice();
-            logger.info("Price " + price);
+            productGrid.getMiniature(i);
+            double price = categoryDetailsPage.getProductPrice();
+            logger.info("Price: " + price);
             assertThat(price).isBetween(9.0, 10.0);
         }
     }

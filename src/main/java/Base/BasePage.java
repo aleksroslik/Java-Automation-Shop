@@ -92,4 +92,10 @@ public class BasePage {
             throw new RuntimeException(e);
         }
     }
+
+    public double getPrice(WebElement element) {
+        String price = element.getText();
+        String plainPriceValue = price.replace("$", "");
+        return Double.parseDouble(plainPriceValue);
+    }
 }

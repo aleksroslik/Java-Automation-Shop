@@ -7,7 +7,6 @@ import PageObjects.Components.SearchWidget;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,12 +46,11 @@ public class SearchTest extends BaseTest {
         logger.info(">>>> Start test Dropdown >>>>>");
         String searchItem = "HUMMINGBIRD";
         searchWidget.searchWithoutClick(searchItem);
-        searchWidget.waitToBeVisible(searchWidget.getSearchResultDropDownList());
-        for(int i=0; i<searchWidget.getSearchResultDropDownItem().size(); i++) {
-            WebElement myElement = searchWidget.getSearchResultDropDownItem().get(i);
-            String textValue = myElement.getText();
+        for(int i=0; i<searchWidget.getSearchDropdownListSize(); i++) {
+            searchWidget.getSearchResultsItem(i);
+            String textValue = searchWidget.getSearchResultItemText(i);
             assertThat(textValue).contains(searchItem);
-            logger.info("Search result value " + textValue);
+            logger.info("Search result value: " + textValue);
         }
         logger.info(">>>> End of Dropdown Search test >>>>>");
     }

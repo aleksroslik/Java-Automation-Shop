@@ -37,11 +37,7 @@ public class CategoryDetailsPage extends BasePage {
         return resultsLabel.getText();
     }
 
-    public String getFilterPriceRangeText() {
-        return filterPriceRange.getText();
-    }
-
-    public Double getProductPrice() {
+    public double getProductPrice() {
         String price = productPrice.getText();
         String plainPriceValue = price.replace("$", "");
         return Double.parseDouble(plainPriceValue);

@@ -26,12 +26,15 @@ public class SearchWidget extends BasePage {
     @FindBy(css = "ul.ui-autocomplete li")
     private List<WebElement> searchResultDropDownItem;
 
-    public List<WebElement> getSearchResultDropDownItem() {
-        return searchResultDropDownItem;
+    public void getSearchResultsItem(int i) {
+    }
+    public String getSearchResultItemText(int i) {
+        WebElement myElement = searchResultDropDownItem.get(i);
+        return myElement.getText();
     }
 
-    public WebElement getSearchResultDropDownList() {
-        return searchResultDropDownList;
+    public int getSearchDropdownListSize() {
+        return searchResultDropDownItem.size();
     }
 
     public void searchWithClick(String productName) {
@@ -41,5 +44,6 @@ public class SearchWidget extends BasePage {
 
     public void searchWithoutClick(String productName) {
         sendKeys(searchInput, productName);
+        waitToBeVisible(searchResultDropDownList);
     }
 }

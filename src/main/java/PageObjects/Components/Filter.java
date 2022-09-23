@@ -24,12 +24,13 @@ public class Filter extends BasePage {
     @FindBy(xpath= "//div[contains(@class, 'ui-slider')]/a[1]")
     private WebElement sliderLeft;
 
-    public WebElement getFilterPanel() {
-        return filterPanel;
+    public boolean confirmFilterIsDisplayed() {
+        return filterPanel.isDisplayed();
     }
 
-    public void slideToLocationLeft(int xTimes) {
-        for (int i=1; i<xTimes; i++) {
+    public void slideToChangePriceRange() {
+        int priceRange = 20;
+        for (int i=1; i<priceRange; i++) {
             scheduleWait(400);
             sliderRight.sendKeys(Keys.ARROW_LEFT);
         }
