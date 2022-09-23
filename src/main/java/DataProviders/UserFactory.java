@@ -1,5 +1,6 @@
-package Models.User;
+package DataProviders;
 
+import Models.User;
 import com.github.javafaker.Faker;
 
 import java.text.SimpleDateFormat;

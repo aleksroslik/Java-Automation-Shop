@@ -4,6 +4,8 @@ import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class CategoriesList extends BasePage {
     public CategoriesList(WebDriver driver) {
         super(driver);
     }
+
+    private static final Logger logger = LoggerFactory.getLogger(CategoriesList.class);
 
     @FindBy(css = "a[data-depth='0']")
     private List<WebElement> topCategoryItems;

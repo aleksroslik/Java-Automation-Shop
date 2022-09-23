@@ -1,8 +1,8 @@
 package Registration;
 
 import Base.BaseTest;
-import Models.User.User;
-import Models.User.UserFactory;
+import Models.User;
+import DataProviders.UserFactory;
 import PageObjects.HomePage;
 import PageObjects.LoginPage;
 import PageObjects.RegistrationPage;

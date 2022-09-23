@@ -15,7 +15,6 @@ public class BaseTest {
 
     protected static WebDriver driver;
     private static AppProperties appProperties;
-    protected static DriverFactory driverFactory;
 
     @BeforeAll
     static void setDriver() {
@@ -24,8 +23,7 @@ public class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        driverFactory = new DriverFactory();
-        driver = driverFactory.getDriver();
+        driver = new DriverFactory().getDriver();
         logger.info(">>>>> Driver started successfully <<<<<");
     }
 
