@@ -38,8 +38,6 @@ public class CategoryDetailsPage extends BasePage {
     }
 
     public double getProductPrice() {
-        String price = productPrice.getText();
-        String plainPriceValue = price.replace("$", "");
-        return Double.parseDouble(plainPriceValue);
+        return getPrice(productPrice);
     }
 }

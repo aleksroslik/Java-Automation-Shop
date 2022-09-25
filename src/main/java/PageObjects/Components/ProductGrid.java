@@ -16,10 +16,6 @@ public class ProductGrid extends BasePage {
     @FindBy(className = "product-title")
     private List<WebElement> productMiniatures;
 
-    public List<WebElement> getProductMiniatures() {
-        return productMiniatures;
-    }
-
     public void clickRandomProduct() {
         WebElement randomProduct = getRandomElement(productMiniatures);
         click(randomProduct);
