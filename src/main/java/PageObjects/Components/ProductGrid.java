@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ProductGrid extends BasePage {
 
@@ -16,9 +17,31 @@ public class ProductGrid extends BasePage {
     @FindBy(className = "product-title")
     private List<WebElement> productMiniatures;
 
-    public void clickRandomProduct() {
-        WebElement randomProduct = getRandomElement(productMiniatures);
-        click(randomProduct);
+    @FindBy(css = "div:nth-child(2) > h2")
+    private List<WebElement> productDescription;
+
+    @FindBy(css = "div:nth-child(2) > article > div > div.product-description")
+    private WebElement theBestPoster;
+
+    @FindBy(css = "a.quick-view")
+    private WebElement quickView;
+
+    public void openProductByName(String expectedName) {
+        try {
+            for (WebElement product : productDescription) {
+                String textValue = product.getText();
+                if (Objects.equals(textValue, expectedName)) {
+                    click(product);
+                }
+            }
+        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
+            for (WebElement product : productDescription) {
+                String textValue = product.getText();
+                if (Objects.equals(textValue, expectedName)) {
+                    click(product);
+                }
+            }
+        }
     }
 
     public String getRandomProductName() {
@@ -30,5 +53,10 @@ public class ProductGrid extends BasePage {
     }
 
     public void getMiniature(int i) {
+    }
+
+    public void openRandomProduct() {
+        WebElement randomProduct = getRandomElement(productMiniatures);
+        click(randomProduct);
     }
 }

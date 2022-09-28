@@ -57,7 +57,7 @@ public class FiltersTest extends BaseTest {
             productGrid.getMiniature(i);
             double price = categoryDetailsPage.getProductPrice();
             logger.info("Price: " + price);
-            assertThat(price).isBetween(9.0, 10.0);
+            assertThat(price).isBetween(9.00, 10.00);
         }
     }
 }
