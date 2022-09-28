@@ -1,12 +1,8 @@
 package Registration;
 
-import Base.BaseTest;
+import Base.Pages;
 import Models.User;
 import DataProviders.UserFactory;
-import PageObjects.HomePage;
-import PageObjects.LoginPage;
-import PageObjects.RegistrationPage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -15,22 +11,11 @@ import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class RegistrationTest extends BaseTest {
+public class RegistrationTest extends Pages {
 
     private static final Logger logger = LoggerFactory.getLogger(RegistrationTest.class);
 
-    RegistrationPage registrationPage;
-    LoginPage loginPage;
-    HomePage homePage;
-    User user;
-
-    @BeforeEach
-    public void testSetup() {
-        registrationPage = new RegistrationPage(driver);
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
-        user = new UserFactory().getRandomUser();
-    }
+    User user = new UserFactory().getRandomUser();
 
     @Test
     @DisplayName("Register new user")

@@ -1,27 +1,15 @@
 package Login;
 
-import Base.BaseTest;
+import Base.Pages;
 import Models.User;
 import DataProviders.UserFactory;
-import PageObjects.HomePage;
-import PageObjects.LoginPage;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends Pages {
 
-    LoginPage loginPage;
-    HomePage homePage;
-    User user;
-
-    @BeforeEach
-    public void testSetup() {
-        user = new UserFactory().getAlreadyRegisteredUser();
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
-    }
+    User user = new UserFactory().getAlreadyRegisteredUser();
 
     @Test
     public void loginExistingUser() {

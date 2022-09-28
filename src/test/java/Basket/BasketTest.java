@@ -1,13 +1,6 @@
 package Basket;
 
-import Base.BaseTest;
-import PageObjects.CartPage;
-import PageObjects.CartPopupPage;
-import PageObjects.Components.CategoriesList;
-import PageObjects.Components.Header;
-import PageObjects.Components.ProductGrid;
-import PageObjects.ProductDetailsPage;
-import org.junit.jupiter.api.BeforeEach;
+import Base.Pages;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -15,26 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class BasketTest extends BaseTest {
+public class BasketTest extends Pages {
 
     private static final Logger logger = LoggerFactory.getLogger(BasketTest.class);
-
-    ProductDetailsPage productDetailsPage;
-    ProductGrid productGrid;
-    CartPopupPage cartPopupPage;
-    CartPage cartPage;
-    CategoriesList categoriesList;
-    Header header;
-
-    @BeforeEach
-    public void testSetup() {
-        productDetailsPage = new ProductDetailsPage(driver);
-        cartPopupPage = new CartPopupPage(driver);
-        cartPage = new CartPage(driver);
-        categoriesList = new CategoriesList(driver);
-        productGrid = new ProductGrid(driver);
-        header = new Header(driver);
-    }
 
     @Test
     @DisplayName("Add products to basket test")
@@ -64,5 +40,24 @@ public class BasketTest extends BaseTest {
         String cartValue = header.getCartValue();
         assertThat(cartValue).contains(String.valueOf(expectedQuantity));
         logger.info(">>>> Finish test add products to Basket >>>>>");
+    }
+
+    @Test
+    @DisplayName("Add random products to basket test")
+    public void addRandomProductsToBasket() {
+        logger.info(">>>> Start test add random products to Basket >>>>>");
+
+        addMultipleProductsToCart(5);
+
+        header.goToCart();
+    }
+
+    private void addMultipleProductsToCart(int numberOfTimes) {
+        for(int i = 0; i < numberOfTimes; i++) {
+            productGrid.openRandomProduct();
+            productDetailsPage.addToCart();
+            cartPopupPage.continueShopping();
+            mainMenu.goToMainPage();
+        }
     }
 }
