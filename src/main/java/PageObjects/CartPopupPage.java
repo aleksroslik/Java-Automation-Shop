@@ -21,6 +21,9 @@ public class CartPopupPage extends BasePage {
     @FindBy(css = ".modal-content .btn.btn-secondary")
     private WebElement continueShoppingBtn;
 
+    @FindBy(css = "a.btn.btn-primary")
+    private WebElement proceedToCheckoutBtn;
+
     @FindBy(css = ".modal-content .product-name")
     private WebElement productName;
 
@@ -42,6 +45,10 @@ public class CartPopupPage extends BasePage {
 
     public void continueShopping() {
         click(continueShoppingBtn);
+    }
+
+    public void proceedToCheckout() {
+        click(proceedToCheckoutBtn);
     }
 
     public String getProductName() {
@@ -75,7 +82,7 @@ public class CartPopupPage extends BasePage {
         logger.info("Product TOTAL price is: " + totalSum);
 
         String quantity = getProductQuantity();
-        logger.info("Quantity is: " + quantity);
+        logger.info(quantity);
 
         String summary = getProductQuantitySummary();
         logger.info("Quantity summary: " + summary);

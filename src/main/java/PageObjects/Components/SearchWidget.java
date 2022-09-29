@@ -28,6 +28,7 @@ public class SearchWidget extends BasePage {
 
     public void getSearchResultsItem(int i) {
     }
+
     public String getSearchResultItemText(int i) {
         WebElement myElement = searchResultDropDownItem.get(i);
         return myElement.getText();

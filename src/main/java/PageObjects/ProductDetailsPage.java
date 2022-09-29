@@ -11,9 +11,6 @@ public class ProductDetailsPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(className = "add-to-cart")
-    private WebElement addToCartBtn;
-
     @FindBy(id = "quantity_wanted")
     private WebElement quantityInput;
 
@@ -23,6 +20,9 @@ public class ProductDetailsPage extends BasePage {
     @FindBy(className = "current-price")
     private WebElement productPrice;
 
+    @FindBy(css = ".add [type='submit']")
+    private WebElement addToCartBtn;
+
     @FindBy(className = ".modal-content")
     private WebElement modalContent;
 
@@ -31,9 +31,10 @@ public class ProductDetailsPage extends BasePage {
         scheduleWait(1000);
     }
 
-    public void setQuantity(int quantity) {
+    public ProductDetailsPage setQuantity(int quantity) {
         quantityInput.clear();
         sendKeys(quantityInput, String.valueOf(quantity));
+        return this;
     }
 
     public String getProductName() {

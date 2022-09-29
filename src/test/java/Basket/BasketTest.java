@@ -23,8 +23,8 @@ public class BasketTest extends Pages {
         productGrid.openProductByName(expectedName);
 
         int expectedQuantity = 3;
-        productDetailsPage.setQuantity(expectedQuantity);
-        productDetailsPage.addToCart();
+        productDetailsPage.setQuantity(expectedQuantity)
+                          .addToCart();
 
         cartPopupPage.getProductDetails();
 
@@ -47,13 +47,13 @@ public class BasketTest extends Pages {
     public void addRandomProductsToBasket() {
         logger.info(">>>> Start test add random products to Basket >>>>>");
 
-        addMultipleProductsToCart(5);
+        addMultipleRandomProductsToCart();
 
         header.goToCart();
     }
 
-    private void addMultipleProductsToCart(int numberOfTimes) {
-        for(int i = 0; i < numberOfTimes; i++) {
+    private void addMultipleRandomProductsToCart() {
+        for(int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
             productDetailsPage.addToCart();
             cartPopupPage.continueShopping();

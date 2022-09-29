@@ -98,4 +98,13 @@ public class BasePage {
         String plainPriceValue = price.replace("$", "");
         return Double.parseDouble(plainPriceValue);
     }
+
+    public void scrollTo(WebElement element) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public void waitForInvisibilityOf(WebElement element) {
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
 }

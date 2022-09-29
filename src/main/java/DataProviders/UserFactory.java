@@ -1,6 +1,5 @@
 package DataProviders;
 
-import Models.User;
 import com.github.javafaker.Faker;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +13,10 @@ public class UserFactory {
                 .email("completely.random@email.com")
                 .password("password")
                 .birthday("01/02/2000")
+                .address("Konwaliowa 5")
+                .alternativeAddress("Różana 8")
+                .postalCode("62-800")
+                .city("Kalisz")
                 .build();
     }
 
@@ -26,6 +29,9 @@ public class UserFactory {
                 .email(faker.name() + ".com")
                 .password(faker.lorem().characters(6, 8))
                 .birthday(sdf.format(faker.date().birthday(18, 80)))
+                .address(faker.address().streetAddress())
+                .postalCode(faker.numerify("11-222"))
+                .city(faker.address().city())
                 .build();
     }
 }

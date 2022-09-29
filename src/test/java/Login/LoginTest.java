@@ -1,7 +1,7 @@
 package Login;
 
 import Base.Pages;
-import Models.User;
+import DataProviders.User;
 import DataProviders.UserFactory;
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +14,11 @@ public class LoginTest extends Pages {
     @Test
     public void loginExistingUser() {
         logger.info(">>>> Start Login test >>>>>");
-        homePage.goToLoginPage();
+        header.goToLoginPage();
         loginPage.loginUser(user);
 
-        logger.info("Account name is: " + homePage.getAccountNameText());
-        assertThat(homePage.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
+        logger.info("Account name is: " + header.getAccountNameText());
+        assertThat(header.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
         logger.info(">>>> End Login test >>>>>");
     }
 }

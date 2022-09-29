@@ -1,7 +1,7 @@
 package PageObjects;
 
 import Base.BasePage;
-import Models.User;
+import DataProviders.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

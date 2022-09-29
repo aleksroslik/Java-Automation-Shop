@@ -108,4 +108,8 @@ public class CategoriesList extends BasePage {
         logger.info("Menu item title " + categoryName);
         return categoryName;
     }
+
+    public void waitForVisibilityOfTopCategories() {
+        waitToBeVisible(topMenu);
+    }
 }

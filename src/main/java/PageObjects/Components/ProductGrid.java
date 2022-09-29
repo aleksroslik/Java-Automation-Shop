@@ -20,11 +20,6 @@ public class ProductGrid extends BasePage {
     @FindBy(css = "div:nth-child(2) > h2")
     private List<WebElement> productDescription;
 
-    @FindBy(css = "div:nth-child(2) > article > div > div.product-description")
-    private WebElement theBestPoster;
-
-    @FindBy(css = "a.quick-view")
-    private WebElement quickView;
 
     public void openProductByName(String expectedName) {
         try {

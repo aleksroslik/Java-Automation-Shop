@@ -16,7 +16,7 @@ public class CategoriesTest extends Pages {
     @DisplayName("Main categories test")
     public void mainCategoryIteration() {
         logger.info(">>>> Start test Top Categories Check >>>>>");
-        categoriesList.waitToBeVisible(categoriesList.getTopMenu());
+        categoriesList.waitForVisibilityOfTopCategories();
         for(int i = 0; i< categoriesList.topCategoriesListSize(); i++) {
             verifyTopCategoryNameWithCategoryPageTitle(i);
             confirmThatFilterIsVisible();
@@ -29,7 +29,7 @@ public class CategoriesTest extends Pages {
     @DisplayName("Sub categories test")
     public void subCategoryIteration() {
         logger.info(">>>> Start test Sub Categories Check >>>>>");
-        categoriesList.waitToBeVisible(categoriesList.getTopMenu());
+        categoriesList.waitForVisibilityOfTopCategories();
         for (int i = 0; i < categoriesList.subCategoriesListSize(); i++) {
             categoriesList.moveToElement(categoriesList.getClothes());
             verifySubCategoryNameWithCategoryPageTitle(i);

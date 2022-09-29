@@ -1,7 +1,7 @@
 package Registration;
 
 import Base.Pages;
-import Models.User;
+import DataProviders.User;
 import DataProviders.UserFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class RegistrationTest extends Pages {
     @DisplayName("Register new user")
     public void registerNewUser() {
         logger.info(">>>> Start Registration test >>>>>");
-        homePage.goToLoginPage();
+        header.goToLoginPage();
 
         loginPage.goToRegistration();
 
@@ -31,8 +31,8 @@ public class RegistrationTest extends Pages {
                 .acceptAgreements()
                 .submitForm();
 
-        logger.info("Account name is: " + homePage.getAccountNameText());
-        assertThat(homePage.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
+        logger.info("Account name is: " + header.getAccountNameText());
+        assertThat(header.getAccountNameText()).isEqualTo(user.getFirstName() + " " + user.getLastName());
         logger.info(">>>> End Registration test >>>>>");
     }
 }
