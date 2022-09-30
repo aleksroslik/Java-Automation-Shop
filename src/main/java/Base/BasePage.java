@@ -107,4 +107,9 @@ public class BasePage {
     public void waitForInvisibilityOf(WebElement element) {
         wait.until(ExpectedConditions.invisibilityOf(element));
     }
+
+    public double getPriceFromText(String text){
+        String substring = text.substring(text.indexOf("$") + 1).trim();
+        return Double.parseDouble(substring);
+    }
 }

@@ -1,4 +1,4 @@
-package PageObjects;
+package PageObjects.Cart;
 
 import Base.BasePage;
 import org.openqa.selenium.WebDriver;
@@ -39,11 +39,15 @@ public class CartPopupPage extends BasePage {
     @FindBy(css = ".modal-content .value")
     private WebElement totalProductValue;
 
+    @FindBy(css = ".modal-content .product-quantity")
+    private WebElement quantityOfProduct;
+
     public void goToCart() {
         click(goToCartBtn);
     }
 
     public void continueShopping() {
+        scheduleWait(500);
         click(continueShoppingBtn);
     }
 
@@ -65,6 +69,12 @@ public class CartPopupPage extends BasePage {
 
     public String getProductQuantity() {
         return productQuantityLabel.getText();
+    }
+
+    public int getQuantityOfProduct() {
+        String text = quantityOfProduct.getText().trim();
+        String substring = text.substring(text.indexOf(":") + 1).trim();
+        return Integer.parseInt(substring);
     }
 
     public String getProductQuantitySummary() {

@@ -1,4 +1,4 @@
-package PageObjects;
+package PageObjects.Order;
 
 import Base.BasePage;
 import org.openqa.selenium.WebDriver;

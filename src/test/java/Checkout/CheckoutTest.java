@@ -1,7 +1,7 @@
 package Checkout;
 
 import Base.Pages;
-import DataProviders.User;
+import Models.User;
 import DataProviders.UserFactory;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

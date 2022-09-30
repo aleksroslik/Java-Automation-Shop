@@ -26,7 +26,7 @@ public class DriverFactory {
             case "firefox" -> getFireFoxDriver();
             case "ie" -> getIeDriver();
             case "edge" -> getEdgeDriver();
-            default -> System.out.println("No driver assigned");
+            default -> throw new IllegalArgumentException();
         }
         driver.get(System.getProperty("appUrl"));
         return driver;

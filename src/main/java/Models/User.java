@@ -1,4 +1,4 @@
-package DataProviders;
+package Models;
 
 public class User {
 

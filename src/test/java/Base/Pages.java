@@ -1,8 +1,13 @@
 package Base;
 
 import PageObjects.*;
+import PageObjects.Cart.CartPopupPage;
+import PageObjects.Cart.ShoppingCartPage;
 import PageObjects.Checkout.*;
-import PageObjects.Components.*;
+import PageObjects.PageComponents.*;
+import PageObjects.Order.OrderConfirmationPage;
+import PageObjects.Order.OrderDetailsPage;
+import PageObjects.Order.OrderHistoryPage;
 import org.junit.jupiter.api.BeforeEach;
 
 public class Pages extends BaseTest {
@@ -10,7 +15,6 @@ public class Pages extends BaseTest {
     public ProductDetailsPage productDetailsPage;
     public ProductGrid productGrid;
     public CartPopupPage cartPopupPage;
-    public CartPage cartPage;
     public CategoriesList categoriesList;
     public Header header;
     public MainMenu mainMenu;
@@ -34,7 +38,6 @@ public class Pages extends BaseTest {
     public void testSetup() {
         productDetailsPage = new ProductDetailsPage(driver);
         cartPopupPage = new CartPopupPage(driver);
-        cartPage = new CartPage(driver);
         categoriesList = new CategoriesList(driver);
         productGrid = new ProductGrid(driver);
         header = new Header(driver);

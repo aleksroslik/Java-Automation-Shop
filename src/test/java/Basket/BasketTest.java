@@ -1,10 +1,17 @@
 package Basket;
 
 import Base.Pages;
+import DataProviders.ProductFactory;
+import Models.Cart;
+import Models.Product;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -47,17 +54,34 @@ public class BasketTest extends Pages {
     public void addRandomProductsToBasket() {
         logger.info(">>>> Start test add random products to Basket >>>>>");
 
-        addMultipleRandomProductsToCart();
-
-        header.goToCart();
-    }
-
-    private void addMultipleRandomProductsToCart() {
+        double totalPrice = 0;
+        double shippingCost = 7;
+        List<Product> products = new ArrayList<>();
         for(int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
-            productDetailsPage.addToCart();
+            productDetailsPage.setRandomQuantity()
+                              .addToCart();
+
+            ProductFactory productFactory = new ProductFactory();
+            Product product = productFactory.getProductInfo(cartPopupPage);
+
+            totalPrice = totalPrice + product.getTotalPrice();
+            products.add(product);
+
             cartPopupPage.continueShopping();
             mainMenu.goToMainPage();
         }
+        Cart actualCart = new Cart(products, totalPrice + shippingCost);
+        logger.info(actualCart.toString());
+        header.goToCart();
+
+        List<Product> productInShoppingCartPage = shoppingCartPage.getAllProductsFromShoppingCart();
+        double totalShoppingCartValue = shoppingCartPage.getTotalCartValue();
+        Cart shoppingCart = new Cart(productInShoppingCartPage, totalShoppingCartValue);
+        logger.info(shoppingCart.toString());
+
+        Assertions.assertThat(actualCart).usingRecursiveComparison().isEqualTo(shoppingCart);
+
+        logger.info(">>>> End test add random products to Basket >>>>>");
     }
 }

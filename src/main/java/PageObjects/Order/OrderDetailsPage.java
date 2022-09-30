@@ -1,4 +1,4 @@
-package PageObjects;
+package PageObjects.Order;
 
 import Base.BasePage;
 import org.openqa.selenium.WebDriver;
@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.math.BigDecimal;
 
 public class OrderDetailsPage extends BasePage {
 
@@ -18,7 +20,7 @@ public class OrderDetailsPage extends BasePage {
     @FindBy(css = "#order-history tr td:nth-child(1)")
     private WebElement date;
 
-    @FindBy(css = "tr.text-xs-right.line-total > td:nth-child(2)")
+    @FindBy(css = "tr.text-xs-right.line-total td:nth-child(2)")
     private WebElement total;
 
     @FindBy(css = "td:nth-child(2) span")

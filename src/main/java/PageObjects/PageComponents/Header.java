@@ -1,9 +1,11 @@
-package PageObjects.Components;
+package PageObjects.PageComponents;
 
 import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.io.IOException;
 
 public class Header extends BasePage {
 
@@ -37,6 +39,11 @@ public class Header extends BasePage {
 
     public void goToCart() {
         click(basketBtn);
+        try {
+            takeScreenshot();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void goToAccount() {
