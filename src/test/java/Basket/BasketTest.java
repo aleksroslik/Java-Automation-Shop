@@ -4,6 +4,7 @@ import Base.Pages;
 import DataProviders.ProductFactory;
 import Models.Cart;
 import Models.Product;
+import org.apache.commons.math3.util.Precision;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ public class BasketTest extends Pages {
         double expectedTotalProductPrice = price*expectedQuantity;
 
         assertThat(cartPopupPage.getProductName()).isEqualTo(expectedName);
-        assertThat(cartPopupPage.getProductQuantity()).contains(String.valueOf(expectedQuantity));
+        assertThat(cartPopupPage.getProductQuantityLabelText()).contains(String.valueOf(expectedQuantity));
         assertThat(cartPopupPage.getTotalProductPrice()).isEqualTo(expectedTotalProductPrice);
 
         cartPopupPage.continueShopping();
@@ -60,28 +61,45 @@ public class BasketTest extends Pages {
         for(int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
             productDetailsPage.setRandomQuantity()
-                              .addToCart();
+                    .addToCart();
 
             ProductFactory productFactory = new ProductFactory();
             Product product = productFactory.getProductInfo(cartPopupPage);
 
+            boolean alreadyInBasket = false;
+            for (Product p : products) {
+                if (p.getName().equals(product.getName())) {
+                    alreadyInBasket = true;
+                    p.setQuantity(product.getQuantity());
+                    p.setQuantityPrice(product.getTotalPrice());
+                    break;
+                }
+            }
+            if (!alreadyInBasket) {
+                products.add(product);
+            }
+
             totalPrice = totalPrice + product.getTotalPrice();
-            products.add(product);
 
             cartPopupPage.continueShopping();
             mainMenu.goToMainPage();
         }
-        Cart actualCart = new Cart(products, totalPrice + shippingCost);
-        logger.info(actualCart.toString());
-        header.goToCart();
+        Cart actualCart = new Cart(products, Precision.round(totalPrice, 2) + shippingCost);
+        logger.info("Actual cart: " + actualCart.toString());
 
+        header.goToCart();
         List<Product> productInShoppingCartPage = shoppingCartPage.getAllProductsFromShoppingCart();
         double totalShoppingCartValue = shoppingCartPage.getTotalCartValue();
         Cart shoppingCart = new Cart(productInShoppingCartPage, totalShoppingCartValue);
-        logger.info(shoppingCart.toString());
+        logger.info("Expected cart: " + shoppingCart.toString());
 
         Assertions.assertThat(actualCart).usingRecursiveComparison().isEqualTo(shoppingCart);
 
         logger.info(">>>> End test add random products to Basket >>>>>");
     }
+
+    /*private void confirmThatBasketIsEmpty() {
+        boolean isBasketEmpty = shoppingCartPage.isBasketEmpty();
+        logger.info("Basket empty: " + isBasketEmpty);
+    }*/
 }

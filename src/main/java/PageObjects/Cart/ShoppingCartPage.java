@@ -26,12 +26,24 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(css = "ul li:nth-child(1) div a i")
     private WebElement deleteBtn;
 
+    @FindBy(className = "no-items")
+    private WebElement noItemsLabel;
+
+    public boolean isDeleteButtonVisible() {
+        return deleteBtn.isDisplayed();
+    }
+
+    public boolean isBasketEmpty() {
+        return noItemsLabel.isDisplayed();
+    }
+
     public void proceed() {
         click(proceed);
     }
 
     public void removeItem() {
-        waitToBeClickable(deleteBtn);
+        scheduleWait(1000);
+        //waitToBeClickable(deleteBtn);
         click(deleteBtn);
     }
 

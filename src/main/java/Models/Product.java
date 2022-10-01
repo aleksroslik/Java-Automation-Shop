@@ -1,7 +1,6 @@
 package Models;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
+import org.apache.commons.math3.util.Precision;
 
 public class Product {
 
@@ -11,7 +10,31 @@ public class Product {
 
     public Product(String name, double quantityPrice, int quantity) {
         this.name = name;
-        this.quantityPrice = quantityPrice;
+        this.quantityPrice = Precision.round(quantityPrice, 2);
+        this.quantity = quantity;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getQuantityPrice() {
+        return quantityPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setQuantityPrice(double quantityPrice) {
+        this.quantityPrice = Precision.round(quantityPrice, 2);
+    }
+
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -25,7 +48,7 @@ public class Product {
     }
 
     public double getTotalPrice() {
-        return quantityPrice*quantity;
+        return Precision.round(quantityPrice*quantity, 2);
     }
 
     public static class ProductBuilder {
@@ -39,7 +62,7 @@ public class Product {
         }
 
         public ProductBuilder setQuantityPrice(double quantityPrice) {
-            this.quantityPrice = quantityPrice;
+            this.quantityPrice = Precision.round(quantityPrice, 2);
             return this;
         }
 

@@ -56,7 +56,7 @@ public class CategoriesTest extends Pages {
         assertThat(categoryName).isEqualTo(catTitle);
     }
 
-    public void confirmThatFilterIsVisible() {
+    private void confirmThatFilterIsVisible() {
         boolean isFilterDisplayed = filter.confirmFilterIsDisplayed();
         logger.info("Filter display: " + isFilterDisplayed);
     }

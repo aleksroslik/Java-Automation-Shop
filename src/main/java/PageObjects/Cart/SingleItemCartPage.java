@@ -29,25 +29,13 @@ public class SingleItemCartPage {
     }
 
     public double getQuantityPrice() {
-        String priceText = quantityPrice.getText();
-        if (priceText.startsWith("$")) {
-            String substring = priceText.substring(priceText.indexOf("$") + 1).trim();
-            return Double.parseDouble(substring);
-        }
-        return -1;
+        String price = quantityPrice.getText();
+        String plainPriceValue = price.replace("$", "");
+        return Double.parseDouble(plainPriceValue);
     }
 
     public int getQuantity() {
         String value = quantity.getAttribute("value");
         return Integer.parseInt(value);
-    }
-
-    public double getTotalPrice(){
-        String text = totalPrice.getText();
-        if (text.startsWith("$")) {
-            String substring = text.substring(text.indexOf("$") + 1).trim();
-            return Double.parseDouble(substring);
-        }
-        return -1;
     }
 }

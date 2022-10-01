@@ -30,7 +30,7 @@ public class CartPopupPage extends BasePage {
     @FindBy(css = ".modal-content p.product-price")
     private WebElement productPrice;
 
-    @FindBy(css = ".modal-content span.product-quantity")
+    @FindBy(css = "span.product-quantity")
     private WebElement productQuantityLabel;
 
     @FindBy(css = ".modal-content p.cart-products-count")
@@ -39,15 +39,16 @@ public class CartPopupPage extends BasePage {
     @FindBy(css = ".modal-content .value")
     private WebElement totalProductValue;
 
-    @FindBy(css = ".modal-content .product-quantity")
-    private WebElement quantityOfProduct;
+    /*@FindBy(css = ".modal-content span.product-quantity")
+    private WebElement quantityOfProduct;*/
 
     public void goToCart() {
         click(goToCartBtn);
     }
 
     public void continueShopping() {
-        scheduleWait(500);
+        //scheduleWait(500);
+        waitToBeClickable(continueShoppingBtn);
         click(continueShoppingBtn);
     }
 
@@ -67,14 +68,13 @@ public class CartPopupPage extends BasePage {
         return getPrice(totalProductValue);
     }
 
-    public String getProductQuantity() {
+    public String getProductQuantityLabelText() {
         return productQuantityLabel.getText();
     }
 
-    public int getQuantityOfProduct() {
-        String text = quantityOfProduct.getText().trim();
-        String substring = text.substring(text.indexOf(":") + 1).trim();
-        return Integer.parseInt(substring);
+    public int getQuantity() {
+        waitToBeVisible(productQuantityLabel);
+        return Integer.parseInt(productQuantityLabel.getText().replace("Quantity: ", ""));
     }
 
     public String getProductQuantitySummary() {
@@ -91,7 +91,7 @@ public class CartPopupPage extends BasePage {
         double totalSum = getTotalProductPrice();
         logger.info("Product TOTAL price is: " + totalSum);
 
-        String quantity = getProductQuantity();
+        String quantity = getProductQuantityLabelText();
         logger.info(quantity);
 
         String summary = getProductQuantitySummary();

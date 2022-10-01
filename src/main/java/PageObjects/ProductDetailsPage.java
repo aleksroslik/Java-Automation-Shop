@@ -34,7 +34,7 @@ public class ProductDetailsPage extends BasePage {
 
     public void addToCart() {
         click(addToCartBtn);
-        scheduleWait(1500);
+        scheduleWait(1000);
     }
 
     public ProductDetailsPage setQuantity(int quantity) {
@@ -44,7 +44,7 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public ProductDetailsPage setRandomQuantity() {
-        int n = new Random().nextInt(5);
+        int n = new Random().nextInt(3);
         for (int i = 0; i < n - 1; i++) {
             click(quantityButtonUp);
         }
