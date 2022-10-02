@@ -16,12 +16,6 @@ public class ProductDetailsPage extends BasePage {
     @FindBy(id = "quantity_wanted")
     private WebElement quantityInput;
 
-    @FindBy(tagName = "h1")
-    private WebElement productTitle;
-
-    @FindBy(className = "current-price")
-    private WebElement productPrice;
-
     @FindBy(css = ".add [type='submit']")
     private WebElement addToCartBtn;
 
@@ -34,7 +28,7 @@ public class ProductDetailsPage extends BasePage {
 
     public void addToCart() {
         click(addToCartBtn);
-        scheduleWait(1000);
+        scheduleWait(800); //zastanowic sie nad alternatywą
     }
 
     public ProductDetailsPage setQuantity(int quantity) {
@@ -49,13 +43,5 @@ public class ProductDetailsPage extends BasePage {
             click(quantityButtonUp);
         }
         return this;
-    }
-
-    public String getProductName() {
-        return productTitle.getText();
-    }
-
-    public double getProductPrice() {
-        return getPrice(productPrice);
     }
 }

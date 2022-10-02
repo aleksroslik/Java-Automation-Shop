@@ -56,8 +56,8 @@ public class BasketTest extends Pages {
         logger.info(">>>> Start test add random products to Basket >>>>>");
 
         double totalPrice = 0;
-        double shippingCost = 7;
         List<Product> products = new ArrayList<>();
+
         for(int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
             productDetailsPage.setRandomQuantity()
@@ -79,22 +79,37 @@ public class BasketTest extends Pages {
             if (!alreadyInBasket) {
                 products.add(product);
             }
-
             totalPrice = totalPrice + product.getTotalPrice();
 
             cartPopupPage.continueShopping();
             mainMenu.goToMainPage();
         }
-        Cart actualCart = new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2) + shippingCost);
+        Cart actualCart = new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2));
         logger.info("Actual cart: " + actualCart.toString());
 
         header.goToCart();
+
         List<Product> productInShoppingCartPage = shoppingCartPage.getAllProductsFromShoppingCart();
         double totalShoppingCartValue = shoppingCartPage.getTotalCartValue();
         Cart shoppingCart = new Cart(productInShoppingCartPage, totalShoppingCartValue);
         logger.info("Expected cart: " + shoppingCart.toString());
 
         Assertions.assertThat(actualCart).usingRecursiveComparison().isEqualTo(shoppingCart);
+
+        while(!products.isEmpty()) {
+            Product item = products.get(0);
+            products.remove(item);
+            Cart actualCart1 = new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2));
+            shoppingCartPage.removeItem();
+            logger.info("Actual cart after removing item: " + actualCart1.toString());
+            List<Product> productInShoppingCartPage1 = shoppingCartPage.getAllProductsFromShoppingCart();
+            double totalShoppingCartValue1 = shoppingCartPage.getTotalCartValue();
+            Cart shoppingCart1 = new Cart(productInShoppingCartPage1, totalShoppingCartValue1);
+            logger.info("Expected cart after removing item: " + shoppingCart1.toString());
+            Assertions.assertThat(actualCart1).usingRecursiveComparison().isEqualTo(shoppingCart1);
+        }
+        String emptyBasket = shoppingCartPage.getEmptyBasketText();
+        assertThat(emptyBasket).isEqualTo("There are no more items in your cart");
 
         logger.info(">>>> End test add random products to Basket >>>>>");
     }

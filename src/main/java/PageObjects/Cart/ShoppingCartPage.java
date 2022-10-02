@@ -17,24 +17,20 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(css = "a.btn.btn-primary")
     private WebElement proceed;
 
-    @FindBy(css = ".cart-total")
+    @FindBy(css = "div#cart-subtotal-products .value")
     private WebElement totalValue;
 
     @FindBy(css = ".cart-item")
     private List<WebElement> allItemsOnList;
 
-    @FindBy(css = ".cart-items .cart-item:nth-of-type(1) .float-xs-left")
+    @FindBy(css = ".remove-from-cart")
     private WebElement deleteBtn;
 
     @FindBy(className = "no-items")
     private WebElement noItemsLabel;
 
-    public boolean isDeleteButtonVisible() {
-        return deleteBtn.isDisplayed();
-    }
-
-    public boolean isBasketEmpty() {
-        return noItemsLabel.isDisplayed();
+    public String getEmptyBasketText() {
+        return noItemsLabel.getText();
     }
 
     public void proceed() {
@@ -42,8 +38,9 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void removeItem() {
-        waitToBeVisible(deleteBtn);
+        waitToBeClickable(deleteBtn);
         click(deleteBtn);
+        scheduleWait(700);
     }
 
     public double getTotalCartValue() {
