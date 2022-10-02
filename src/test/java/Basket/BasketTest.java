@@ -71,7 +71,8 @@ public class BasketTest extends Pages {
                 if (p.getName().equals(product.getName())) {
                     alreadyInBasket = true;
                     p.setQuantity(product.getQuantity());
-                    p.setQuantityPrice(product.getTotalPrice());
+                    p.setQuantityPrice(product.getQuantityPrice());
+                    p.setTotalPrice(product.getTotalPrice());
                     break;
                 }
             }
@@ -84,7 +85,7 @@ public class BasketTest extends Pages {
             cartPopupPage.continueShopping();
             mainMenu.goToMainPage();
         }
-        Cart actualCart = new Cart(products, Precision.round(totalPrice, 2) + shippingCost);
+        Cart actualCart = new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2) + shippingCost);
         logger.info("Actual cart: " + actualCart.toString());
 
         header.goToCart();
@@ -97,9 +98,4 @@ public class BasketTest extends Pages {
 
         logger.info(">>>> End test add random products to Basket >>>>>");
     }
-
-    /*private void confirmThatBasketIsEmpty() {
-        boolean isBasketEmpty = shoppingCartPage.isBasketEmpty();
-        logger.info("Basket empty: " + isBasketEmpty);
-    }*/
 }

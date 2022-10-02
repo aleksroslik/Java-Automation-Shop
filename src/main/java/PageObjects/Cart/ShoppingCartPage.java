@@ -23,7 +23,7 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(css = ".cart-item")
     private List<WebElement> allItemsOnList;
 
-    @FindBy(css = "ul li:nth-child(1) div a i")
+    @FindBy(css = ".cart-items .cart-item:nth-of-type(1) .float-xs-left")
     private WebElement deleteBtn;
 
     @FindBy(className = "no-items")
@@ -42,8 +42,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public void removeItem() {
-        scheduleWait(1000);
-        //waitToBeClickable(deleteBtn);
+        waitToBeVisible(deleteBtn);
         click(deleteBtn);
     }
 
@@ -68,8 +67,9 @@ public class ShoppingCartPage extends BasePage {
             String name = singleItemCartPage.getName();
             double quantityPrice = singleItemCartPage.getQuantityPrice();
             int quantity = singleItemCartPage.getQuantity();
+            double totalPrice = singleItemCartPage.getTotalPrice();
 
-            Product product = new Product(name, quantityPrice, quantity);
+            Product product = new Product(name, quantityPrice, quantity, totalPrice);
             products.add(product);
         }
         return products;

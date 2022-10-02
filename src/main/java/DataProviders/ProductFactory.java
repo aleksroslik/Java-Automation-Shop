@@ -10,11 +10,13 @@ public class ProductFactory {
         String name = cartPopupPage.getProductName();
         double quantityPrice = cartPopupPage.getProductPrice();
         int quantity = cartPopupPage.getQuantity();
+        double totalPrice = cartPopupPage.getProductPrice()*cartPopupPage.getQuantity();
 
         return new Product.ProductBuilder()
-                .setName(name)
-                .setQuantityPrice(quantityPrice)
-                .setQuantity(quantity)
+                .name(name)
+                .quantityPrice(quantityPrice)
+                .quantity(quantity)
+                .totalPrice(totalPrice)
                 .build();
     }
 }

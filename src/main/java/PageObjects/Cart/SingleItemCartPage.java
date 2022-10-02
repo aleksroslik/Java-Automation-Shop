@@ -34,6 +34,12 @@ public class SingleItemCartPage {
         return Double.parseDouble(plainPriceValue);
     }
 
+    public double getTotalPrice() {
+        String price = totalPrice.getText();
+        String plainPriceValue = price.replace("$", "");
+        return Double.parseDouble(plainPriceValue);
+    }
+
     public int getQuantity() {
         String value = quantity.getAttribute("value");
         return Integer.parseInt(value);

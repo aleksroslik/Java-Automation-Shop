@@ -61,7 +61,7 @@ public class CheckoutTest extends Pages {
 
         orderHistoryPage.getOrderDetails();
 
-        assertThat(orderDetailsPage.getOrderDate()).isEqualTo("09/30/2022");
+        assertThat(orderDetailsPage.getOrderDate()).isEqualTo("10/02/2022");
         assertThat(orderDetailsPage.getTotalPrice()).isEqualTo(29.00);
         assertThat(orderDetailsPage.getPaymentStatus()).isEqualTo("Awaiting check payment");
         assertThat(orderDetailsPage.getInvoiceAddress()).contains(user.getAlternativeAddress());

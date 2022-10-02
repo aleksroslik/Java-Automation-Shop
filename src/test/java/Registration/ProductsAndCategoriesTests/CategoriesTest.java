@@ -1,4 +1,4 @@
-package ProductsAndCategoriesTests;
+package Registration.ProductsAndCategoriesTests;
 
 import Base.Pages;
 import org.junit.jupiter.api.DisplayName;

@@ -39,15 +39,14 @@ public class CartPopupPage extends BasePage {
     @FindBy(css = ".modal-content .value")
     private WebElement totalProductValue;
 
-    /*@FindBy(css = ".modal-content span.product-quantity")
-    private WebElement quantityOfProduct;*/
+    @FindBy(xpath = "//span[contains(@class, 'subtotal value')]")
+    private WebElement totalProductsValue;
 
     public void goToCart() {
         click(goToCartBtn);
     }
 
     public void continueShopping() {
-        //scheduleWait(500);
         waitToBeClickable(continueShoppingBtn);
         click(continueShoppingBtn);
     }

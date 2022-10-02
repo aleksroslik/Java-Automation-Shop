@@ -22,19 +22,11 @@ public class ProductGrid extends BasePage {
 
 
     public void openProductByName(String expectedName) {
-        try {
-            for (WebElement product : productDescription) {
-                String textValue = product.getText();
-                if (Objects.equals(textValue, expectedName)) {
-                    click(product);
-                }
-            }
-        } catch (org.openqa.selenium.StaleElementReferenceException ex) {
-            for (WebElement product : productDescription) {
-                String textValue = product.getText();
-                if (Objects.equals(textValue, expectedName)) {
-                    click(product);
-                }
+        for (WebElement product : productDescription) {
+            String textValue = product.getText();
+            if (Objects.equals(textValue, expectedName)) {
+                click(product);
+                break;
             }
         }
     }

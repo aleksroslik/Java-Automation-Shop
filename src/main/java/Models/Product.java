@@ -7,11 +7,13 @@ public class Product {
     private String name;
     private double quantityPrice;
     private int quantity;
+    private double totalPrice;
 
-    public Product(String name, double quantityPrice, int quantity) {
+    public Product(String name, double quantityPrice, int quantity, double totalPrice) {
         this.name = name;
         this.quantityPrice = Precision.round(quantityPrice, 2);
         this.quantity = quantity;
+        this.totalPrice = totalPrice;
     }
 
     public String getName() {
@@ -34,6 +36,10 @@ public class Product {
         this.quantityPrice = Precision.round(quantityPrice, 2);
     }
 
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = Precision.round(totalPrice, 2);
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -44,9 +50,9 @@ public class Product {
                 "name='" + name + '\'' +
                 ", quantityPrice=" + quantityPrice +
                 ", quantity=" + quantity +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
-
     public double getTotalPrice() {
         return Precision.round(quantityPrice*quantity, 2);
     }
@@ -56,23 +62,30 @@ public class Product {
         private double quantityPrice;
         private int quantity;
 
-        public ProductBuilder setName(String name) {
+        private double totalPrice;
+
+        public ProductBuilder name(String name) {
             this.name = name;
             return this;
         }
 
-        public ProductBuilder setQuantityPrice(double quantityPrice) {
+        public ProductBuilder quantityPrice(double quantityPrice) {
             this.quantityPrice = Precision.round(quantityPrice, 2);
             return this;
         }
 
-        public ProductBuilder setQuantity(int quantity) {
+        public ProductBuilder quantity(int quantity) {
             this.quantity = quantity;
             return this;
         }
 
+        public ProductBuilder totalPrice(double totalPrice) {
+            this.totalPrice = totalPrice;
+            return this;
+        }
+
         public Product build() {
-            return new Product(name, quantityPrice, quantity);
+            return new Product(name, quantityPrice, quantity, totalPrice);
         }
     }
 }

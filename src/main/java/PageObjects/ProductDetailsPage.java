@@ -44,7 +44,7 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public ProductDetailsPage setRandomQuantity() {
-        int n = new Random().nextInt(3);
+        int n = new Random().nextInt(5);
         for (int i = 0; i < n - 1; i++) {
             click(quantityButtonUp);
         }
