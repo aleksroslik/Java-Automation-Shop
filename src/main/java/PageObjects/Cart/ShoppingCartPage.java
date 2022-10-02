@@ -1,10 +1,13 @@
 package PageObjects.Cart;
 
 import Base.BasePage;
+import Models.Cart;
 import Models.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,8 @@ public class ShoppingCartPage extends BasePage {
 
     public ShoppingCartPage(WebDriver driver) {super(driver);
     }
+    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartPage.class);
+
 
     @FindBy(css = "a.btn.btn-primary")
     private WebElement proceed;
@@ -70,5 +75,11 @@ public class ShoppingCartPage extends BasePage {
             products.add(product);
         }
         return products;
+    }
+
+    public Cart getShoppingCart() {
+        List<Product> allProductsInTheCart = getAllProductsFromShoppingCart();
+        double totalShoppingCartValue = getTotalCartValue();
+        return new Cart(allProductsInTheCart, totalShoppingCartValue);
     }
 }

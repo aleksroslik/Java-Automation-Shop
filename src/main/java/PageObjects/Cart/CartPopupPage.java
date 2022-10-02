@@ -42,10 +42,6 @@ public class CartPopupPage extends BasePage {
     @FindBy(xpath = "//span[contains(@class, 'subtotal value')]")
     private WebElement totalProductsValue;
 
-    public void goToCart() {
-        click(goToCartBtn);
-    }
-
     public void continueShopping() {
         waitToBeClickable(continueShoppingBtn);
         click(continueShoppingBtn);

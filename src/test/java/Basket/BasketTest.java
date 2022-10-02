@@ -51,66 +51,71 @@ public class BasketTest extends Pages {
     }
 
     @Test
-    @DisplayName("Add random products to basket test")
-    public void addRandomProductsToBasket() {
+    @DisplayName("Add random products and clear basket test")
+    public void addRandomProductsAndClearBasket() {
         logger.info(">>>> Start test add random products to Basket >>>>>");
 
-        double totalPrice = 0;
         List<Product> products = new ArrayList<>();
 
         for(int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
             productDetailsPage.setRandomQuantity()
-                    .addToCart();
-
-            ProductFactory productFactory = new ProductFactory();
-            Product product = productFactory.getProductInfo(cartPopupPage);
-
-            boolean alreadyInBasket = false;
-            for (Product p : products) {
-                if (p.getName().equals(product.getName())) {
-                    alreadyInBasket = true;
-                    p.setQuantity(product.getQuantity());
-                    p.setQuantityPrice(product.getQuantityPrice());
-                    p.setTotalPrice(product.getTotalPrice());
-                    break;
-                }
-            }
-            if (!alreadyInBasket) {
-                products.add(product);
-            }
-            totalPrice = totalPrice + product.getTotalPrice();
-
+                              .addToCart();
+            addProductsToActualList(products);
             cartPopupPage.continueShopping();
             mainMenu.goToMainPage();
         }
-        Cart actualCart = new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2));
+        Cart actualCart =
+                new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2));
         logger.info("Actual cart: " + actualCart.toString());
 
         header.goToCart();
 
-        List<Product> productInShoppingCartPage = shoppingCartPage.getAllProductsFromShoppingCart();
-        double totalShoppingCartValue = shoppingCartPage.getTotalCartValue();
-        Cart shoppingCart = new Cart(productInShoppingCartPage, totalShoppingCartValue);
-        logger.info("Expected cart: " + shoppingCart.toString());
+        Cart expectedCart = shoppingCartPage.getShoppingCart();
+        logger.info("Expected cart: " + expectedCart.toString());
 
-        Assertions.assertThat(actualCart).usingRecursiveComparison().isEqualTo(shoppingCart);
+        Assertions.assertThat(actualCart)
+                .usingRecursiveComparison().isEqualTo(expectedCart);
 
-        while(!products.isEmpty()) {
-            Product item = products.get(0);
-            products.remove(item);
-            Cart actualCart1 = new Cart(products, Precision.round(products.stream().mapToDouble(Product::getTotalPrice).sum(), 2));
-            shoppingCartPage.removeItem();
-            logger.info("Actual cart after removing item: " + actualCart1.toString());
-            List<Product> productInShoppingCartPage1 = shoppingCartPage.getAllProductsFromShoppingCart();
-            double totalShoppingCartValue1 = shoppingCartPage.getTotalCartValue();
-            Cart shoppingCart1 = new Cart(productInShoppingCartPage1, totalShoppingCartValue1);
-            logger.info("Expected cart after removing item: " + shoppingCart1.toString());
-            Assertions.assertThat(actualCart1).usingRecursiveComparison().isEqualTo(shoppingCart1);
-        }
+        removeItemsOneByOneAndCompare(products);
+
         String emptyBasket = shoppingCartPage.getEmptyBasketText();
         assertThat(emptyBasket).isEqualTo("There are no more items in your cart");
 
         logger.info(">>>> End test add random products to Basket >>>>>");
+    }
+
+    private void addProductsToActualList(List<Product> list) {
+        ProductFactory productFactory = new ProductFactory();
+        Product product = productFactory.getProductInfo(cartPopupPage);
+
+        boolean alreadyInBasket = false;
+        for (Product p : list) {
+            if (p.getName().equals(product.getName())) {
+                alreadyInBasket = true;
+                p.setQuantity(product.getQuantity());
+                p.setQuantityPrice(product.getQuantityPrice());
+                p.setTotalPrice(product.getTotalPrice());
+                break;
+            }
+        }
+        if (!alreadyInBasket) {
+            list.add(product);
+        }
+    }
+
+    private void removeItemsOneByOneAndCompare(List<Product> list) {
+        while(!list.isEmpty()) {
+            Product item = list.get(0);
+            list.remove(item);
+            Cart actualCartAfterItemRemoval =
+                    new Cart(list, Precision.round(list.stream().mapToDouble(Product::getTotalPrice).sum(), 2));
+            shoppingCartPage.removeItem();
+            logger.info("Actual cart after removing item: " + actualCartAfterItemRemoval.toString());
+            Cart expectedCartAfterItemRemoval = shoppingCartPage.getShoppingCart();
+            logger.info("Expected cart after removing item: " + expectedCartAfterItemRemoval.toString());
+            Assertions.assertThat(actualCartAfterItemRemoval)
+                    .usingRecursiveComparison().isEqualTo(expectedCartAfterItemRemoval);
+        }
     }
 }

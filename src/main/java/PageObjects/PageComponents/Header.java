@@ -44,7 +44,6 @@ public class Header extends BasePage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        //scheduleWait(1000);
     }
 
     public void goToAccount() {
