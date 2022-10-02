@@ -16,8 +16,6 @@ public class ShoppingCartPage extends BasePage {
 
     public ShoppingCartPage(WebDriver driver) {super(driver);
     }
-    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartPage.class);
-
 
     @FindBy(css = "a.btn.btn-primary")
     private WebElement proceed;

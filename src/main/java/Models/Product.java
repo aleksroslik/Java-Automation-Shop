@@ -61,7 +61,6 @@ public class Product {
         private String name;
         private double quantityPrice;
         private int quantity;
-
         private double totalPrice;
 
         public ProductBuilder name(String name) {
