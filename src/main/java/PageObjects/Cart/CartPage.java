@@ -39,9 +39,8 @@ public class CartPage extends BasePage {
     }
 
     public void removeItem() {
-        waitToBeClickable(deleteBtn);
         click(deleteBtn);
-        scheduleWait(700);
+        scheduleWait(500);
     }
 
     public double getTotalCartValue() {

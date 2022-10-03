@@ -22,10 +22,13 @@ public class ProductDetailsPage extends BasePage {
     @FindBy(xpath = "//button[contains(@class, 'touchspin-up')]")
     private WebElement quantityButtonUp;
 
+    @FindBy(css = "div#blockcart-modal  .modal-content")
+    private WebElement modalContent;
+
 
     public void addToCart() {
         click(addToCartBtn);
-        scheduleWait(600);
+        waitToBeVisible(modalContent);
     }
 
     public ProductDetailsPage setQuantity(int quantity) {
