@@ -43,22 +43,10 @@ public class BasePage {
         element.sendKeys(text);
     }
 
-    public void sendKeysWithClear(WebElement element, String text) {
-        element.clear();
-        if(element.getText().length() !=0) {
-            element.sendKeys(Keys.ALT + "a" + Keys.DELETE);
-        }
-        sendKeys(element, text);
-    }
-
     public WebElement getRandomElement(List<WebElement> elements) {
         Random random = new Random();
         int randomIndexOfList = random.nextInt(elements.size());
         return elements.get(randomIndexOfList);
-    }
-
-    public <T> Object getRandom(List<T> elements) {
-        return elements.get(new Random().nextInt(elements.size()));
     }
 
     public void waitToBeClickable(WebElement element) {
@@ -67,10 +55,6 @@ public class BasePage {
 
     public void waitToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public void waitForElementsVisibility(List<WebElement> elements) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
     public void waitForUrlToBe(String url) {
@@ -102,10 +86,6 @@ public class BasePage {
     public void scrollTo(WebElement element) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
-    public void waitForInvisibilityOf(WebElement element) {
-        wait.until(ExpectedConditions.invisibilityOf(element));
     }
 
     public double getPriceFromText(String text){

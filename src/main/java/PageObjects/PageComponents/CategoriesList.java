@@ -35,28 +35,8 @@ public class CategoriesList extends BasePage {
     @FindBy(id = "category-9")
     private WebElement art;
 
-    @FindBy(css = "li#category-4")
-    private WebElement men;
-
-    @FindBy(css = "li#category-5")
-    private WebElement women;
-
-    @FindBy(css = "li#category-7")
-    private WebElement stationery;
-
-    @FindBy(css = "li#category-8")
-    private WebElement homeAccessories;
-
-    public WebElement getTopMenu() {
-        return topMenu;
-    }
-
     public WebElement getClothes() {
         return clothes;
-    }
-
-    public WebElement getArt() {
-        return art;
     }
 
     public WebElement getAccessories() {
@@ -69,14 +49,6 @@ public class CategoriesList extends BasePage {
 
     public void clickOnArtCategory() {
         click(art);
-    }
-
-    public void clickOnClothesCategory() {
-        click(clothes);
-    }
-
-    public void clickOnAccessoriesCategory() {
-        click(accessories);
     }
 
     public int topCategoriesListSize() {

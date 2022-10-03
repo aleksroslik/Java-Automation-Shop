@@ -1,6 +1,7 @@
 package PageObjects.Checkout;
 
 import Base.BasePage;
+import PageObjects.Order.OrderConfirmationPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,6 +32,6 @@ public class PaymentsPage extends BasePage {
 
     public void confirmOrder() {
         click(placeOrderButton);
-        new ConfirmationPage(driver);
+        new OrderConfirmationPage(driver);
     }
 }

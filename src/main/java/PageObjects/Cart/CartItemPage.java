@@ -5,9 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-public class SingleItemCartPage {
+public class CartItemPage {
 
-    public SingleItemCartPage(WebElement item) {
+    public CartItemPage(WebElement item) {
         PageFactory.initElements(new DefaultElementLocatorFactory(item), this);
     }
 

@@ -19,16 +19,13 @@ public class ProductDetailsPage extends BasePage {
     @FindBy(css = ".add [type='submit']")
     private WebElement addToCartBtn;
 
-    @FindBy(className = ".modal-content")
-    private WebElement modalContent;
-
     @FindBy(xpath = "//button[contains(@class, 'touchspin-up')]")
     private WebElement quantityButtonUp;
 
 
     public void addToCart() {
         click(addToCartBtn);
-        scheduleWait(800); //zastanowic sie nad alternatywą
+        scheduleWait(600);
     }
 
     public ProductDetailsPage setQuantity(int quantity) {

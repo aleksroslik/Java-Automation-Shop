@@ -27,12 +27,6 @@ public class OrderHistoryPage extends BasePage {
         click(orderDetails);
     }
 
-    public void goToOrderDetails(String id) {
-        if(getOrders().contains(id)) {
-            getOrderDetails();
-        }
-    }
-
     public String getOrders() {
         for (WebElement order : allOrders) {
             String orders = order.getText();

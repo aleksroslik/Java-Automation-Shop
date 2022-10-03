@@ -4,18 +4,12 @@ import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.math.BigDecimal;
 
 public class OrderConfirmationPage extends BasePage {
 
     public OrderConfirmationPage(WebDriver driver) {
         super(driver);
     }
-
-    private static final Logger logger = LoggerFactory.getLogger(OrderConfirmationPage.class);
 
     @FindBy(css = "div.col-sm-4.col-xs-9.details span")
     private WebElement productName;
@@ -78,19 +72,5 @@ public class OrderConfirmationPage extends BasePage {
 
     public String getOrderReferenceNumber() {
         return orderReference.getText().replace("Order reference: ", "");
-    }
-
-    public void getOrderDetails() {
-        getQuantity();
-        getUnitPrice();
-        getTotalPrice();
-        getShippingAndHandling();
-        getPaymentMethod();
-        getShippingMethod();
-        getCheckPaymentDetails();
-        getOrderReferenceNumber();
-        logger.info(getQuantity() + ", " + getUnitPrice() + ", " + getTotalPrice() + ", " + getShippingAndHandling()
-                    + ", " + getPaymentMethod() + ", " + getShippingMethod() + ", " + getCheckPaymentDetails()
-                    + ", " + getOrderReferenceNumber());
     }
 }

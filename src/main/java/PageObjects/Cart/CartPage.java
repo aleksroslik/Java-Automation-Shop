@@ -6,15 +6,13 @@ import Models.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartPage extends BasePage {
+public class CartPage extends BasePage {
 
-    public ShoppingCartPage(WebDriver driver) {super(driver);
+    public CartPage(WebDriver driver) {super(driver);
     }
 
     @FindBy(css = "a.btn.btn-primary")
@@ -51,23 +49,23 @@ public class ShoppingCartPage extends BasePage {
         return getPriceFromText(text);
     }
 
-    public List<SingleItemCartPage> getAllItemsOnCartList() {
-        List<SingleItemCartPage> allItems = new ArrayList<>();
+    public List<CartItemPage> getAllItemsOnCartList() {
+        List<CartItemPage> allItems = new ArrayList<>();
 
         for (WebElement item : allItemsOnList) {
-            allItems.add(new SingleItemCartPage(item));
+            allItems.add(new CartItemPage(item));
         }
         return allItems;
     }
 
     public List<Product> getAllProductsFromShoppingCart() {
-        List<SingleItemCartPage> allItemsOnCartList = getAllItemsOnCartList();
+        List<CartItemPage> allItemsOnCartList = getAllItemsOnCartList();
         List<Product> products = new ArrayList<>();
-        for (SingleItemCartPage singleItemCartPage : allItemsOnCartList) {
-            String name = singleItemCartPage.getName();
-            double quantityPrice = singleItemCartPage.getQuantityPrice();
-            int quantity = singleItemCartPage.getQuantity();
-            double totalPrice = singleItemCartPage.getTotalPrice();
+        for (CartItemPage cartItemPage : allItemsOnCartList) {
+            String name = cartItemPage.getName();
+            double quantityPrice = cartItemPage.getQuantityPrice();
+            int quantity = cartItemPage.getQuantity();
+            double totalPrice = cartItemPage.getTotalPrice();
 
             Product product = new Product(name, quantityPrice, quantity, totalPrice);
             products.add(product);

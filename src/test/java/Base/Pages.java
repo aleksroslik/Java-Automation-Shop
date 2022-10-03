@@ -2,7 +2,7 @@ package Base;
 
 import PageObjects.*;
 import PageObjects.Cart.CartPopupPage;
-import PageObjects.Cart.ShoppingCartPage;
+import PageObjects.Cart.CartPage;
 import PageObjects.Checkout.*;
 import PageObjects.PageComponents.*;
 import PageObjects.Order.OrderConfirmationPage;
@@ -25,10 +25,9 @@ public class Pages extends BaseTest {
     public SearchWidget searchWidget;
     public SearchResultsPage searchResultsPage;
     public AddressPage addressPage;
-    public ConfirmationPage confirmationPage;
     public PaymentsPage paymentsPage;
     public ShippingPage shippingPage;
-    public ShoppingCartPage shoppingCartPage;
+    public CartPage cartPage;
     public OrderConfirmationPage orderConfirmationPage;
     public AccountPage accountPage;
     public OrderHistoryPage orderHistoryPage;
@@ -49,10 +48,9 @@ public class Pages extends BaseTest {
         searchWidget = new SearchWidget(driver);
         searchResultsPage = new SearchResultsPage(driver);
         addressPage = new AddressPage(driver);
-        confirmationPage = new ConfirmationPage(driver);
         paymentsPage = new PaymentsPage(driver);
         shippingPage = new ShippingPage(driver);
-        shoppingCartPage = new ShoppingCartPage(driver);
+        cartPage = new CartPage(driver);
         orderConfirmationPage = new OrderConfirmationPage(driver);
         accountPage = new AccountPage(driver);
         orderHistoryPage = new OrderHistoryPage(driver);

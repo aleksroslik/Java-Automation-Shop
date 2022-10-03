@@ -53,7 +53,7 @@ public class BasketTest extends Pages {
     public void addRandomProductsAndClearBasket() {
         logger.info(">>>> Start test add random products and clear Basket >>>>>");
 
-        for(int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
             productDetailsPage.setRandomQuantity()
                               .addToCart();
@@ -66,31 +66,26 @@ public class BasketTest extends Pages {
 
         header.goToCart();
 
-        Cart expectedCart = shoppingCartPage.getShoppingCart();
+        Cart expectedCart = cartPage.getShoppingCart();
         logger.info("Expected cart: " + expectedCart.toString());
 
         Assertions.assertThat(actualCart)
                 .usingRecursiveComparison().isEqualTo(expectedCart);
 
-        removeItemsOneByOneAndCompare();
-
-        String emptyBasket = shoppingCartPage.getEmptyBasketText();
-        assertThat(emptyBasket).isEqualTo("There are no more items in your cart");
-
-        logger.info(">>>> End test add random products and clear Basket >>>>>");
-    }
-
-    private void removeItemsOneByOneAndCompare() {
-        while(!orderList.isOrderListEmpty()) {
+        while (!orderList.isOrderListEmpty()) {
             Product item = orderList.getProducts().get(0);
             orderList.getProducts().remove(item);
             Cart actualCartAfterItemRemoval = orderList.getShoppingCart();
-            shoppingCartPage.removeItem();
+            cartPage.removeItem();
             logger.info("Actual cart after removing item: " + actualCartAfterItemRemoval.toString());
-            Cart expectedCartAfterItemRemoval = shoppingCartPage.getShoppingCart();
+            Cart expectedCartAfterItemRemoval = cartPage.getShoppingCart();
             logger.info("Expected cart after removing item: " + expectedCartAfterItemRemoval.toString());
             Assertions.assertThat(actualCartAfterItemRemoval)
                     .usingRecursiveComparison().isEqualTo(expectedCartAfterItemRemoval);
         }
+        String emptyBasket = cartPage.getEmptyBasketText();
+        assertThat(emptyBasket).isEqualTo("There are no more items in your cart");
+
+        logger.info(">>>> End test add random products and clear Basket >>>>>");
     }
 }

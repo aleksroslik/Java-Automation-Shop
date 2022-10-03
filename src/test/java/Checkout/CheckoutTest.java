@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CheckoutTest extends Pages {
@@ -14,6 +17,8 @@ public class CheckoutTest extends Pages {
     protected static Logger logger = LoggerFactory.getLogger(CheckoutTest.class);
 
     User user = new UserFactory().getAlreadyRegisteredUser();
+    Date date = new Date();
+    SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
     @Test
     public void successfulCheckoutTest() {
@@ -30,7 +35,7 @@ public class CheckoutTest extends Pages {
         productDetailsPage.addToCart();
 
         cartPopupPage.proceedToCheckout();
-        shoppingCartPage.proceed();
+        cartPage.proceed();
 
         addressPage.changeBillingAddress(user)
                    .continueToShipping();
@@ -61,7 +66,7 @@ public class CheckoutTest extends Pages {
 
         orderHistoryPage.getOrderDetails();
 
-        assertThat(orderDetailsPage.getOrderDate()).isEqualTo("10/02/2022");
+        assertThat(orderDetailsPage.getOrderDate()).isEqualTo(formatter.format(date));
         assertThat(orderDetailsPage.getTotalPrice()).isEqualTo(29.00);
         assertThat(orderDetailsPage.getPaymentStatus()).isEqualTo("Awaiting check payment");
         assertThat(orderDetailsPage.getInvoiceAddress()).contains(user.getAlternativeAddress());

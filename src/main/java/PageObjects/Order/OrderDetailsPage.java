@@ -4,18 +4,12 @@ import Base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.math.BigDecimal;
 
 public class OrderDetailsPage extends BasePage {
 
     public OrderDetailsPage(WebDriver driver) {
         super(driver);
     }
-
-    private static final Logger logger = LoggerFactory.getLogger(OrderDetailsPage.class);
 
     @FindBy(css = "#order-history tr td:nth-child(1)")
     private WebElement date;
@@ -50,15 +44,5 @@ public class OrderDetailsPage extends BasePage {
 
     public String getInvoiceAddress() {
         return invoiceAddress.getText();
-    }
-
-    public void getOrderDetails() {
-        getOrderDate();
-        getTotalPrice();
-        getPaymentStatus();
-        getDeliveryAddress();
-        getInvoiceAddress();
-        logger.info(getOrderDate() + ", " + getTotalPrice() + ", " + getPaymentStatus() + ", " + getDeliveryAddress()
-                + ", " + getInvoiceAddress());
     }
 }

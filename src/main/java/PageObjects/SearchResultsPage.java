@@ -14,12 +14,6 @@ public class SearchResultsPage extends BasePage {
     @FindBy(className = "product-title")
     private WebElement productName;
 
-    @FindBy(className = "col-md-4")
-    private WebElement foundItemsBottomLabel;
-
-    @FindBy(className = "total-products")
-    private WebElement foundItemsTopLabel;
-
     public String getProductName() {
         return productName.getText();
     }
