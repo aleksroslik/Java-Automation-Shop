@@ -6,6 +6,7 @@ import Models.OrderList;
 import Models.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +49,7 @@ public class BasketTest extends Pages {
         logger.info(">>>> Finish test add products to Basket >>>>>");
     }
 
-    @Test
+    @RepeatedTest(10)
     @DisplayName("Add random products and clear basket test")
     public void addRandomProductsAndClearBasket() {
         logger.info(">>>> Start test add random products and clear Basket >>>>>");
