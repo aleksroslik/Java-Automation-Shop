@@ -49,7 +49,7 @@ public class BasketTest extends Pages {
         logger.info(">>>> Finish test add products to Basket >>>>>");
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(1)
     @DisplayName("Add random products and clear basket test")
     public void addRandomProductsAndClearBasket() {
         logger.info(">>>> Start test add random products and clear Basket >>>>>");
@@ -84,8 +84,7 @@ public class BasketTest extends Pages {
             Assertions.assertThat(actualCartAfterItemRemoval)
                     .usingRecursiveComparison().isEqualTo(expectedCartAfterItemRemoval);
         }
-        String emptyBasket = cartPage.getEmptyBasketText();
-        assertThat(emptyBasket).isEqualTo("There are no more items in your cart");
+        assertThat(cartPage.getEmptyBasketText()).isEqualTo("There are no more items in your cart");
 
         logger.info(">>>> End test add random products and clear Basket >>>>>");
     }
