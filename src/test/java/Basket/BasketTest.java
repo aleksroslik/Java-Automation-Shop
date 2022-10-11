@@ -33,7 +33,7 @@ public class BasketTest extends Pages {
         productDetailsPage.setQuantity(expectedQuantity)
                           .addToCart();
 
-        cartPopupPage.getProductDetails();
+        cartPopupPage.printProductDetails();
 
         double price = cartPopupPage.getProductPrice();
         double expectedTotalProductPrice = price*expectedQuantity;
@@ -56,7 +56,7 @@ public class BasketTest extends Pages {
 
         for (int i = 0; i < 5; i++) {
             productGrid.openRandomProduct();
-            productDetailsPage.setRandomQuantity()
+            productDetailsPage.setRandomQuantity(5)
                               .addToCart();
             orderList.addProductsToActualList(cartPopupPage);
             cartPopupPage.continueShopping();

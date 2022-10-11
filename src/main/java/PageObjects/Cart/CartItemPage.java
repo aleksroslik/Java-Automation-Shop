@@ -1,13 +1,16 @@
 package PageObjects.Cart;
 
+import Base.BasePage;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
-public class CartItemPage {
+public class CartItemPage extends BasePage {
 
-    public CartItemPage(WebElement item) {
+    public CartItemPage(WebDriver driver, WebElement item) {
+        super(driver);
         PageFactory.initElements(new DefaultElementLocatorFactory(item), this);
     }
 
@@ -29,15 +32,11 @@ public class CartItemPage {
     }
 
     public double getQuantityPrice() {
-        String price = quantityPrice.getText();
-        String plainPriceValue = price.replace("$", "");
-        return Double.parseDouble(plainPriceValue);
+        return getPrice(quantityPrice);
     }
 
     public double getTotalPrice() {
-        String price = totalPrice.getText();
-        String plainPriceValue = price.replace("$", "");
-        return Double.parseDouble(plainPriceValue);
+        return getPrice(totalPrice);
     }
 
     public int getQuantity() {

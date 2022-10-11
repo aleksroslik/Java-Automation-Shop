@@ -39,9 +39,6 @@ public class CartPopupPage extends BasePage {
     @FindBy(css = ".modal-content .value")
     private WebElement totalProductValue;
 
-    @FindBy(xpath = "//span[contains(@class, 'subtotal value')]")
-    private WebElement totalProductsValue;
-
     public void continueShopping() {
         waitToBeClickable(continueShoppingBtn);
         click(continueShoppingBtn);
@@ -76,20 +73,11 @@ public class CartPopupPage extends BasePage {
         return productQuantitySummary.getText();
     }
 
-    public void getProductDetails() {
-        String product = getProductName();
-        logger.info("Product name is: " + product);
-
-        double price = getProductPrice();
-        logger.info("Product price is: " + price);
-
-        double totalSum = getTotalProductPrice();
-        logger.info("Product TOTAL price is: " + totalSum);
-
-        String quantity = getProductQuantityLabelText();
-        logger.info(quantity);
-
-        String summary = getProductQuantitySummary();
-        logger.info("Quantity summary: " + summary);
+    public void printProductDetails() {
+        logger.info("Product name is: " + getProductName());
+        logger.info("Product price is: " + getProductPrice());
+        logger.info("Product TOTAL price is: " + getTotalProductPrice());
+        logger.info(getProductQuantityLabelText());
+        logger.info("Quantity summary: " + getProductQuantitySummary());
     }
 }

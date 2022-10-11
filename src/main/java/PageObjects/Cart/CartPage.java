@@ -52,7 +52,7 @@ public class CartPage extends BasePage {
         List<CartItemPage> allItems = new ArrayList<>();
 
         for (WebElement item : allItemsOnList) {
-            allItems.add(new CartItemPage(item));
+            allItems.add(new CartItemPage(driver, item));
         }
         return allItems;
     }

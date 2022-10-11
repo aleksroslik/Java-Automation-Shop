@@ -17,12 +17,9 @@ public class ProductGrid extends BasePage {
     @FindBy(className = "product-title")
     private List<WebElement> productMiniatures;
 
-    @FindBy(css = "div:nth-child(2) > h2")
-    private List<WebElement> productDescription;
-
 
     public void openProductByName(String expectedName) {
-        for (WebElement product : productDescription) {
+        for (WebElement product : productMiniatures) {
             String textValue = product.getText();
             if (Objects.equals(textValue, expectedName)) {
                 click(product);
